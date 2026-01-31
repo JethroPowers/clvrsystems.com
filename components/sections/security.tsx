@@ -2,7 +2,7 @@
 
 import { useRef } from "react"
 import { motion, useInView } from "framer-motion"
-import { Shield, Lock, FileCheck, CheckCircle, Database, CreditCard } from "lucide-react"
+import { Shield, Lock, FileCheck, Eye, Database, Trash2 } from "lucide-react"
 import { useMediaQuery } from "@/hooks/use-media-query"
 
 export default function Security() {
@@ -10,37 +10,37 @@ export default function Security() {
   const isInView = useInView(ref, { once: true, amount: 0.2 })
   const isMobile = useMediaQuery("(max-width: 768px)")
 
-  // Security standards with icons, descriptions, and tooltips
-  const securityStandards = [
+  // Security controls - honest wording without claiming certifications
+  const securityControls = [
     {
-      name: "AES-256",
+      name: "Encryption",
       icon: <Lock className="h-6 w-6 sm:h-8 sm:w-8" />,
-      description: "Military-grade data encryption",
+      description: "Data encrypted at rest and in transit using AES-256",
     },
     {
-      name: "GDPR",
-      icon: <FileCheck className="h-6 w-6 sm:h-8 sm:w-8" />,
-      description: "Full compliance with EU data protection laws",
-    },
-    {
-      name: "HIPAA",
+      name: "Access Control",
       icon: <Shield className="h-6 w-6 sm:h-8 sm:w-8" />,
-      description: "Healthcare data protection standards",
+      description: "Least privilege access with role-based permissions",
     },
     {
-      name: "SOC 2",
-      icon: <CheckCircle className="h-6 w-6 sm:h-8 sm:w-8" />,
-      description: "Verified security controls and procedures",
+      name: "Audit Logging",
+      icon: <Eye className="h-6 w-6 sm:h-8 sm:w-8" />,
+      description: "Complete audit trail of all system actions and changes",
     },
     {
-      name: "ISO 27001",
+      name: "Data Retention",
       icon: <Database className="h-6 w-6 sm:h-8 sm:w-8" />,
-      description: "International information security standard",
+      description: "Configurable retention policies with secure archival",
     },
     {
-      name: "PCI-DSS",
-      icon: <CreditCard className="h-6 w-6 sm:h-8 sm:w-8" />,
-      description: "Payment card industry security standard",
+      name: "Data Deletion",
+      icon: <Trash2 className="h-6 w-6 sm:h-8 sm:w-8" />,
+      description: "Complete data deletion on request with verification",
+    },
+    {
+      name: "Vendor Hygiene",
+      icon: <FileCheck className="h-6 w-6 sm:h-8 sm:w-8" />,
+      description: "Vetted integrations with security-reviewed vendors only",
     },
   ]
 
@@ -54,26 +54,29 @@ export default function Security() {
           className="flex flex-col items-center text-center mb-8 sm:mb-12"
         >
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-serif text-white mb-3 sm:mb-4">
-            Enterprise-Grade Security & Compliance
+            Security Controls
           </h2>
           <p className="text-base sm:text-lg text-white/90 max-w-2xl leading-relaxed">
-            Our systems meet globally recognized standards for data security, privacy, and operational integrity.
+            Our operators are designed to support enterprise security requirements with robust controls and practices.
           </p>
         </motion.div>
 
-        {/* Security standards grid for mobile */}
+        {/* Security controls grid */}
         <div ref={ref} className="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
-          {securityStandards.map((standard, index) => (
-            <div
+          {securityControls.map((control, index) => (
+            <motion.div
               key={index}
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
               className="flex flex-col items-center text-center bg-white/10 rounded-lg p-4 backdrop-blur-sm"
             >
               <div className="bg-white/10 rounded-full p-3 sm:p-4 mb-2 sm:mb-3">
-                <div className="text-white">{standard.icon}</div>
+                <div className="text-white">{control.icon}</div>
               </div>
-              <h3 className="text-lg sm:text-xl font-bold text-white mb-1">{standard.name}</h3>
-              <p className="text-xs sm:text-sm text-white/90">{standard.description}</p>
-            </div>
+              <h3 className="text-lg sm:text-xl font-bold text-white mb-1">{control.name}</h3>
+              <p className="text-xs sm:text-sm text-white/90">{control.description}</p>
+            </motion.div>
           ))}
         </div>
 

@@ -178,11 +178,11 @@ const techStackData = [
 ]
 
 // Stats for the dynamic progress chart
-const performanceStats = [
-  { label: "Uptime", value: "99.9%", color: "bg-green-500" },
-  { label: "Average Agent Response", value: "2s", color: "bg-blue-500" },
-  { label: "Data Processing", value: "50ms", color: "bg-purple-500" },
-  { label: "API Latency", value: "120ms", color: "bg-yellow-500" },
+const operationalGuarantees = [
+  { label: "System Uptime", value: "99.9%", color: "bg-green-500" },
+  { label: "Escalation Response", value: "<5min", color: "bg-blue-500" },
+  { label: "Weekly Reports", value: "100%", color: "bg-purple-500" },
+  { label: "Data Portability", value: "Full", color: "bg-yellow-500" },
 ]
 
 // Technology ecosystem data
@@ -205,6 +205,13 @@ const techEcosystem = [
   { name: "Shopify", domain: "shopify.com" },
   { name: "Klaviyo", domain: "klaviyo.com" },
   { name: "Greenhouse", domain: "greenhouse.io" },
+]
+
+const performanceStats = [
+  { label: "System Uptime", value: "99.9%", color: "bg-green-500" },
+  { label: "Escalation Response", value: "<5min", color: "bg-blue-500" },
+  { label: "Weekly Reports", value: "100%", color: "bg-purple-500" },
+  { label: "Data Portability", value: "Full", color: "bg-yellow-500" },
 ]
 
 export default function TechStack() {
@@ -244,10 +251,10 @@ export default function TechStack() {
         >
           <div className="bg-white rounded-lg shadow-sm p-4 sm:p-6">
             <h3 className="text-lg sm:text-xl font-bold font-serif text-forest-green mb-4 sm:mb-6 text-center">
-              Performance Metrics
+              Operational Guarantees
             </h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
-              {performanceStats.map((stat, index) => (
+              {operationalGuarantees.map((stat, index) => (
                 <motion.div
                   key={stat.label}
                   initial={{ width: "0%" }}
@@ -294,77 +301,74 @@ export default function TechStack() {
                 )}
               </motion.div>
 
-              <AnimatePresence>
-                {expandedSections[section.title] && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="overflow-hidden"
-                  >
-                    <div className="px-4 sm:px-6 pb-4 sm:pb-6">
-                      {section.layers && (
-                        <div className="overflow-x-auto">
-                          <table className="w-full border-collapse">
-                            <thead>
-                              <tr className="border-b border-gray-200">
-                                <th className="py-3 px-2 sm:px-4 text-left text-xs sm:text-sm font-medium text-gray-500">
-                                  Layer
-                                </th>
-                                <th className="py-3 px-2 sm:px-4 text-left text-xs sm:text-sm font-medium text-gray-500">
-                                  Tools / Technologies
-                                </th>
-                                <th className="py-3 px-2 sm:px-4 text-left text-xs sm:text-sm font-medium text-gray-500">
-                                  Why It Matters
-                                </th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              {section.layers.map((layer, layerIndex) => (
-                                <motion.tr
-                                  key={layer.name}
-                                  initial={{ opacity: 0, y: 10 }}
-                                  animate={{ opacity: 1, y: 0 }}
-                                  transition={{ duration: 0.3, delay: 0.1 * layerIndex }}
-                                  className="border-b border-gray-100 hover:bg-gray-50 group"
-                                >
-                                  <td className="py-3 px-2 sm:px-4">
-                                    <div className="flex items-center space-x-2 sm:space-x-3">
-                                      <div className="relative w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-gray-100 flex items-center justify-center overflow-hidden">
-                                        <LogoImage domain={layer.domain} name={layer.name} size={isMobile ? 24 : 32} />
-                                      </div>
-                                      <span className="font-medium text-forest-green text-sm sm:text-base">
-                                        {layer.name}
-                                      </span>
+              {expandedSections[section.title] && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  transition={{ duration: 0.3 }}
+                  className="overflow-hidden"
+                >
+                  <div className="px-4 sm:px-6 pb-4 sm:pb-6">
+                    {section.layers && (
+                      <div className="overflow-x-auto">
+                        <table className="w-full border-collapse">
+                          <thead>
+                            <tr className="border-b border-gray-200">
+                              <th className="py-3 px-2 sm:px-4 text-left text-xs sm:text-sm font-medium text-gray-500">
+                                Layer
+                              </th>
+                              <th className="py-3 px-2 sm:px-4 text-left text-xs sm:text-sm font-medium text-gray-500">
+                                Tools / Technologies
+                              </th>
+                              <th className="py-3 px-2 sm:px-4 text-left text-xs sm:text-sm font-medium text-gray-500">
+                                Why It Matters
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {section.layers.map((layer, layerIndex) => (
+                              <motion.tr
+                                key={layer.name}
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.3, delay: 0.1 * layerIndex }}
+                                className="border-b border-gray-100 hover:bg-gray-50 group"
+                              >
+                                <td className="py-3 px-2 sm:px-4">
+                                  <div className="flex items-center space-x-2 sm:space-x-3">
+                                    <div className="relative w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-gray-100 flex items-center justify-center overflow-hidden">
+                                      <LogoImage domain={layer.domain} name={layer.name} size={isMobile ? 24 : 32} />
                                     </div>
-                                  </td>
-                                  <td className="py-3 px-2 sm:px-4 text-xs sm:text-sm text-gray-600">{layer.tools}</td>
-                                  <td className="py-3 px-2 sm:px-4 text-xs sm:text-sm text-gray-600">
-                                    <div className="flex items-center">
-                                      <TooltipProvider>
-                                        <Tooltip>
-                                          <TooltipTrigger asChild>
-                                            <Info className="h-3 w-3 sm:h-4 sm:w-4 text-gray-400 mr-1 sm:mr-2 cursor-pointer flex-shrink-0" />
-                                          </TooltipTrigger>
-                                          <TooltipContent>
-                                            <p className="max-w-xs text-xs sm:text-sm">{layer.why}</p>
-                                          </TooltipContent>
-                                        </Tooltip>
-                                      </TooltipProvider>
-                                      <span className="line-clamp-2 sm:line-clamp-none">{layer.why}</span>
-                                    </div>
-                                  </td>
-                                </motion.tr>
-                              ))}
-                            </tbody>
-                          </table>
-                        </div>
-                      )}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                                    <span className="font-medium text-forest-green text-sm sm:text-base">
+                                      {layer.name}
+                                    </span>
+                                  </div>
+                                </td>
+                                <td className="py-3 px-2 sm:px-4 text-xs sm:text-sm text-gray-600">{layer.tools}</td>
+                                <td className="py-3 px-2 sm:px-4 text-xs sm:text-sm text-gray-600">
+                                  <div className="flex items-center">
+                                    <TooltipProvider>
+                                      <Tooltip>
+                                        <TooltipTrigger asChild>
+                                          <Info className="h-3 w-3 sm:h-4 sm:w-4 text-gray-400 mr-1 sm:mr-2 cursor-pointer flex-shrink-0" />
+                                        </TooltipTrigger>
+                                        <TooltipContent>
+                                          <p className="max-w-xs text-xs sm:text-sm">{layer.why}</p>
+                                        </TooltipContent>
+                                      </Tooltip>
+                                    </TooltipProvider>
+                                    <span className="line-clamp-2 sm:line-clamp-none">{layer.why}</span>
+                                  </div>
+                                </td>
+                              </motion.tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    )}
+                  </div>
+                </motion.div>
+              )}
             </motion.div>
           ))}
         </div>

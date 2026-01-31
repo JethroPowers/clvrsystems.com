@@ -1,13 +1,13 @@
 "use client"
 
 import type React from "react"
-
+import { AnimatePresence } from "framer-motion"
 import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { motion, AnimatePresence } from "framer-motion"
+import { motion } from "framer-motion"
 import { useScrollSpy } from "@/hooks/use-scroll-spy"
 
 // Navigation items
@@ -141,7 +141,7 @@ export default function Header() {
           >
             <a href="https://tally.so/r/mZGbo5" target="_blank" rel="noopener noreferrer">
               <Button className="bg-mint-green text-forest-green hover:bg-mint-green/90 transition-all duration-300">
-                Deploy Your System
+                Book Systems Audit
               </Button>
             </a>
           </motion.div>
@@ -162,53 +162,50 @@ export default function Header() {
       </div>
 
       {/* Mobile Navigation Menu */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-            className="lg:hidden fixed inset-0 top-16 bg-forest-green z-40 overflow-auto"
-          >
-            <nav className="flex flex-col py-8 px-6 h-full">
-              {navItems.map((item, i) => (
-                <motion.div
-                  key={item.href}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.3, delay: 0.05 * i }}
-                >
-                  <Link
-                    href={item.href}
-                    onClick={(e) => handleNavClick(e, item.href)}
-                    className={cn(
-                      "block py-4 text-xl font-medium text-white hover:text-mint-green transition-colors border-b border-white/10",
-                      (activeSection === item.href.replace("#", "") || (activeSection === "" && item.href === "#")) &&
-                        "text-mint-green",
-                    )}
-                  >
-                    {item.label}
-                  </Link>
-                </motion.div>
-              ))}
-
+      {mobileMenuOpen && (
+        <motion.div
+          initial={{ opacity: 0, height: 0 }}
+          animate={{ opacity: 1, height: "auto" }}
+          transition={{ duration: 0.3 }}
+          className="lg:hidden fixed inset-0 top-16 bg-forest-green z-40 overflow-auto"
+        >
+          <nav className="flex flex-col py-8 px-6 h-full">
+            {navItems.map((item, i) => (
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: 0.4 }}
-                className="mt-auto"
+                key={item.href}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.3, delay: 0.05 * i }}
               >
-                <a href="https://tally.so/r/mZGbo5" target="_blank" rel="noopener noreferrer">
-                  <Button className="w-full bg-mint-green text-forest-green hover:bg-mint-green/90 py-6 text-lg">
-                    Deploy Your System
-                  </Button>
-                </a>
+                <Link
+                  href={item.href}
+                  onClick={(e) => handleNavClick(e, item.href)}
+                  className={cn(
+                    "block py-4 text-xl font-medium text-white hover:text-mint-green transition-colors border-b border-white/10",
+                    (activeSection === item.href.replace("#", "") || (activeSection === "" && item.href === "#")) &&
+                      "text-mint-green",
+                  )}
+                >
+                  {item.label}
+                </Link>
               </motion.div>
-            </nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            ))}
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: 0.4 }}
+              className="mt-auto"
+            >
+              <a href="https://tally.so/r/mZGbo5" target="_blank" rel="noopener noreferrer">
+                <Button className="w-full bg-mint-green text-forest-green hover:bg-mint-green/90 py-6 text-lg">
+                  Book Systems Audit
+                </Button>
+              </a>
+            </motion.div>
+          </nav>
+        </motion.div>
+      )}
     </header>
   )
 }

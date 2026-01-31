@@ -11,27 +11,27 @@ export default function HowWeDoIt() {
   const steps = [
     {
       number: "01",
-      title: "Architect Systems",
+      title: "Baseline the Leak",
       description:
-        "Define modular agent workflows, data schema, and communication logic tailored to client operations.",
+        "Capture your current workflow and baseline KPIs—see exactly where revenue leaks or money stalls.",
       icon: <Network className="h-8 w-8 text-forest-green" />,
     },
     {
       number: "02",
-      title: "Build & Integrate",
-      description: "Deploy LangGraph agents, Supabase data cores, and comms pipelines (Twilio, Resend, WhatsApp).",
+      title: "Install the Operator",
+      description: "Deploy integrations, rules, policies, and tests—configured for your specific workflow.",
       icon: <Layers className="h-8 w-8 text-forest-green" />,
     },
     {
       number: "03",
-      title: "Train & Optimize",
-      description: "Train agents with retrieval, embeddings, and fine-tuning for performance and reliability.",
+      title: "Run Automatically",
+      description: "Operators enforce decisions with stop conditions and escalation paths—no daily user effort.",
       icon: <Cpu className="h-8 w-8 text-forest-green" />,
     },
     {
       number: "04",
-      title: "Monitor & Scale",
-      description: "Implement analytics, compliance safeguards, and optimization loops for continuous improvement.",
+      title: "Prove + Improve",
+      description: "Weekly reporting shows outcomes. We tune the operator based on real data, not guesses.",
       icon: <LineChart className="h-8 w-8 text-forest-green" />,
     },
   ]
@@ -47,8 +47,7 @@ export default function HowWeDoIt() {
         >
           <h2 className="text-3xl md:text-4xl font-bold font-serif text-forest-green mb-4">How We Do It</h2>
           <p className="text-lg text-gray-600 max-w-2xl leading-relaxed">
-            Every system we deploy follows a structured engineering pipeline—built to scale, adapt, and operate
-            autonomously.
+            Every operator follows the same deployment pipeline—baseline, install, run, prove.
           </p>
         </motion.div>
 
@@ -115,7 +114,7 @@ export default function HowWeDoIt() {
           transition={{ duration: 0.6, delay: 0.8 }}
           className="flex flex-wrap justify-center gap-2 mt-16"
         >
-          {["LangGraph", "Supabase", "Twilio", "OpenAI", "Embeddings", "Analytics"].map((term, index) => (
+          {["Integrations", "Rules Engine", "Stop Conditions", "Escalations", "Weekly Reports", "Tuning"].map((term, index) => (
             <motion.span
               key={term}
               initial={{ opacity: 0, scale: 0.8 }}

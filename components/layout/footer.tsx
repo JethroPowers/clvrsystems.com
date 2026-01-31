@@ -31,7 +31,7 @@ export default function Footer() {
               <span className="text-xl font-bold font-serif text-white">CLVR</span>
               <span className="text-xl font-normal font-serif text-white/80">Automations</span>
             </div>
-            <p className="text-sm">Building the future of AI system infrastructure.</p>
+            <p className="text-sm">Operators that control revenue + money workflows.</p>
             <div className="flex gap-4">
               {socialLinks.map((social, index) => (
                 <Link

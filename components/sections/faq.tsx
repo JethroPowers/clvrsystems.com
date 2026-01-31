@@ -2,37 +2,43 @@
 
 import { useState } from "react"
 import { ChevronDown, ChevronUp } from "lucide-react"
-import { motion, AnimatePresence } from "framer-motion"
+import { motion } from "framer-motion"
 import { useMediaQuery } from "@/hooks/use-media-query"
+import { AnimatePresence } from "framer-motion"
 
 export default function Faq() {
   const isMobile = useMediaQuery("(max-width: 768px)")
 
   const faqItems = [
     {
-      question: "How does your AI system differ from off-the-shelf solutions?",
+      question: "Do we need to change our existing tools?",
       answer:
-        "Our AI systems are custom-built for specific vertical industries, with modular components that can be tailored to your exact business processes. Unlike generic solutions, we provide full ownership of your system infrastructure.",
+        "No. Our operators integrate with your current tools—CRMs, calendars, payment systems, messaging platforms. We work alongside what you already use, not replace it.",
     },
     {
-      question: "What industries do you specialize in?",
+      question: "What access do you need to get started?",
       answer:
-        "We currently specialize in healthcare (via Emilia.io), e-commerce (CommerceIQ), and HR/recruiting (TalentTunnel), with legal and real estate solutions on our roadmap.",
+        "We need API access or admin credentials to the systems the operator will control (booking software, invoicing tools, etc.). We document every integration and follow least-privilege access principles.",
     },
     {
-      question: "How long does implementation typically take?",
+      question: "How fast can we go live?",
       answer:
-        "Implementation timelines vary based on complexity, but typically range from 4-12 weeks. Our modular approach allows us to deploy core functionality quickly and iteratively add capabilities.",
+        "Most operators are live within 2-4 weeks. Week 1 is baseline + setup. Week 2-3 is integration + testing. Week 4 is live with stop conditions in place.",
     },
     {
-      question: "What security measures do you have in place?",
+      question: "What happens when something fails or needs review?",
       answer:
-        "We implement enterprise-grade security including AES-256 encryption, GDPR compliance, HIPAA-ready infrastructure, and SOC 2 verified controls. All data is encrypted both at rest and in transit.",
+        "Every operator has stop conditions and escalation paths. When a rule triggers a stop, the operator pauses and escalates to a human. You stay in control of edge cases.",
     },
     {
-      question: "Can your systems integrate with our existing tools?",
+      question: "Can we pause or override the operator?",
       answer:
-        "Yes, our systems are designed for seamless integration with popular platforms like Shopify, Calendly, Greenhouse, WordPress, and Airtable, as well as custom APIs and databases.",
+        "Yes. You can pause any operator instantly. You can also set manual override rules for specific scenarios or clients. The operator respects your boundaries.",
+    },
+    {
+      question: "What does weekly reporting include?",
+      answer:
+        "Weekly reports show outcomes, not just activity. You'll see what the operator blocked, approved, collected, and recovered—plus recommendations for tuning based on real data.",
     },
   ]
 
@@ -42,7 +48,7 @@ export default function Faq() {
         <div className="flex flex-col items-center text-center mb-8 sm:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-serif text-forest-green mb-3 sm:mb-4">FAQ</h2>
           <p className="text-base sm:text-lg text-gray-600 max-w-2xl leading-relaxed">
-            Common questions about our AI systems and approach.
+            Common questions about how our operators work.
           </p>
         </div>
 
@@ -56,7 +62,7 @@ export default function Faq() {
   )
 }
 
-function FaqItem({ question, answer, index }) {
+function FaqItem({ question, answer, index }: { question: string; answer: string; index: number }) {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
@@ -79,20 +85,17 @@ function FaqItem({ question, answer, index }) {
         </div>
       </button>
 
-      <AnimatePresence initial={false}>
-        {isOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            <div className="px-6 pb-4 text-gray-600 text-sm sm:text-base">
-              <p>{answer}</p>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {isOpen && (
+        <motion.div
+          initial={{ height: 0, opacity: 0 }}
+          animate={{ height: "auto", opacity: 1 }}
+          transition={{ duration: 0.3 }}
+        >
+          <div className="px-6 pb-4 text-gray-600 text-sm sm:text-base">
+            <p>{answer}</p>
+          </div>
+        </motion.div>
+      )}
     </div>
   )
 }

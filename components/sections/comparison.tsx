@@ -13,61 +13,46 @@ export default function Comparison() {
 
   const comparisonData = [
     {
-      capability: "System Ownership",
-      tooltip: "Full control of your AI infrastructure with no vendor lock-in",
+      capability: "Owns a Workflow Choke Point",
+      tooltip: "Controls the exact point where revenue leaks or money stalls",
       clvr: true,
       agencies: false,
       genericSaas: false,
     },
     {
-      capability: "Vertical Specialization",
-      tooltip: "Deep industry knowledge built into every system component",
+      capability: "Enforces Decisions",
+      tooltip: "Actively approves, blocks, or routes—not just tracks",
+      clvr: true,
+      agencies: false,
+      genericSaas: false,
+    },
+    {
+      capability: "Runs Without Daily User Effort",
+      tooltip: "Operates automatically with minimal human intervention",
+      clvr: true,
+      agencies: false,
+      genericSaas: true,
+    },
+    {
+      capability: "Stop Conditions + Escalation",
+      tooltip: "Clear rules for when to halt and escalate to humans",
+      clvr: true,
+      agencies: false,
+      genericSaas: false,
+    },
+    {
+      capability: "Weekly Outcome Reporting",
+      tooltip: "Regular proof of results, not just activity metrics",
       clvr: true,
       agencies: true,
       genericSaas: false,
     },
     {
-      capability: "Customization Depth",
-      tooltip: "Ability to modify every aspect of the system to match your exact processes",
-      clvr: true,
-      agencies: false,
-      genericSaas: false,
-    },
-    {
-      capability: "Operational Control",
-      tooltip: "Direct access to modify system behavior without vendor intervention",
-      clvr: true,
-      agencies: false,
-      genericSaas: false,
-    },
-    {
-      capability: "Data Ownership",
-      tooltip: "Your data remains yours, with no third-party access or usage rights",
+      capability: "Data Ownership + Portability",
+      tooltip: "Your data remains yours with full export capability",
       clvr: true,
       agencies: false,
       genericSaas: true,
-    },
-    // Additional comparison rows
-    {
-      capability: "Scalability",
-      tooltip: "Ability to handle growing workloads without performance degradation",
-      clvr: true,
-      agencies: true,
-      genericSaas: true,
-    },
-    {
-      capability: "Integration Flexibility",
-      tooltip: "Seamless connection with existing tools and systems in your tech stack",
-      clvr: true,
-      agencies: false,
-      genericSaas: true,
-    },
-    {
-      capability: "Cost Predictability",
-      tooltip: "Transparent pricing with no unexpected scaling costs or hidden fees",
-      clvr: true,
-      agencies: false,
-      genericSaas: false,
     },
   ]
 
@@ -82,7 +67,7 @@ export default function Comparison() {
         >
           <h2 className="text-3xl md:text-4xl font-bold font-serif text-forest-green mb-4">Our Position</h2>
           <p className="text-lg text-gray-600 max-w-2xl leading-relaxed mb-2">
-            Choosing the wrong provider costs you control, speed, and adaptability. Here's why CLVR builds differently.
+            Operators own outcomes. Agencies sell hours. SaaS sells seats. Here's why we build differently.
           </p>
         </motion.div>
 
@@ -93,7 +78,7 @@ export default function Comparison() {
               <thead>
                 <tr>
                   <th className="p-3 md:p-4 text-left font-serif bg-forest-green text-white rounded-tl-lg">
-                    <span className="text-sm md:text-base">Capability</span>
+                    <span className="text-sm md:text-base">Operator Doctrine</span>
                   </th>
                   <th className="p-3 md:p-4 text-center font-serif bg-forest-green text-white relative">
                     <div className="absolute inset-0 bg-mint-green/10 backdrop-blur-sm"></div>
@@ -180,8 +165,7 @@ export default function Comparison() {
           className="mt-12 text-center"
         >
           <p className="text-forest-green font-medium max-w-2xl mx-auto">
-            With CLVR, you get a system you own, control, and can adapt as your business evolves—without dependency on
-            external vendors or generic limitations.
+            With CLVR operators, you get enforceable outcomes at workflow choke points—not dashboards, not hours, not seats.
           </p>
         </motion.div>
       </div>

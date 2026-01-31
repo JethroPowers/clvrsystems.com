@@ -3,18 +3,44 @@
 import { useRef } from "react"
 import { motion, useInView } from "framer-motion"
 import { useMediaQuery } from "@/hooks/use-media-query"
+import { Shield, Heart, DollarSign } from "lucide-react"
 
 export default function Vision() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.2 })
   const isMobile = useMediaQuery("(max-width: 768px)")
 
-  const timelineItems = [
-    { year: "2024", product: "Emilia.io", status: "Production" },
-    { year: "2025", product: "CommerceIQ", status: "Coming Q4" },
-    { year: "2026", product: "TalentTunnel", status: "Coming Q1" },
-    { year: "2026", product: "LegalFlow", status: "Coming Q3" },
-    { year: "2027", product: "RealtySync", status: "Coming Q2" },
+  const operatorModules = [
+    {
+      operator: "CLVR Verified",
+      icon: <Shield className="h-5 w-5" />,
+      color: "bg-mint-green/20 text-forest-green",
+      modules: [
+        { name: "Gate", description: "Approval workflow" },
+        { name: "Proof", description: "Documentation layer" },
+        { name: "Recon", description: "Reconciliation" },
+      ],
+    },
+    {
+      operator: "Emilia AI",
+      icon: <Heart className="h-5 w-5" />,
+      color: "bg-lavender/20 text-forest-green",
+      modules: [
+        { name: "Wallet", description: "Loyalty credits" },
+        { name: "Referrals", description: "Tracked invites" },
+        { name: "Reactivation", description: "Win-back flows" },
+      ],
+    },
+    {
+      operator: "MarginFlow",
+      icon: <DollarSign className="h-5 w-5" />,
+      color: "bg-teal/20 text-forest-green",
+      modules: [
+        { name: "Quote Speed", description: "Same-day quotes" },
+        { name: "Change Orders", description: "Signed extras" },
+        { name: "Collections", description: "Invoice + collect" },
+      ],
+    },
   ]
 
   return (
@@ -34,98 +60,51 @@ export default function Vision() {
           transition={{ duration: 0.6 }}
           className="flex flex-col items-center text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold font-serif text-forest-green mb-4">Vision for the Future</h2>
+          <h2 className="text-3xl md:text-4xl font-bold font-serif text-forest-green mb-4">Operator Modules</h2>
           <p className="text-lg text-gray-600 max-w-2xl leading-relaxed">
-            Our roadmap for expanding AI system infrastructure across industries.
+            Each operator ships with specific modules that own their workflow choke points.
           </p>
         </motion.div>
 
-        <div ref={ref} className="max-w-3xl mx-auto">
-          {isMobile ? (
-            // Mobile timeline (vertical)
-            <div className="relative pl-8">
-              {/* Vertical line */}
+        <div ref={ref} className="max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {operatorModules.map((operator, index) => (
               <motion.div
-                initial={{ scaleY: 0 }}
-                animate={isInView ? { scaleY: 1 } : { scaleY: 0 }}
-                transition={{ duration: 1.5, ease: "easeOut" }}
-                className="absolute left-0 top-0 bottom-0 w-0.5 bg-forest-green/20 transform origin-top"
-              ></motion.div>
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                transition={{ duration: 0.6, delay: 0.2 * index }}
+                className="bg-white rounded-lg shadow-md overflow-hidden"
+              >
+                {/* Operator Header */}
+                <div className={`p-4 ${operator.color} flex items-center gap-3`}>
+                  <div className="bg-forest-green/10 p-2 rounded-lg">
+                    {operator.icon}
+                  </div>
+                  <h3 className="font-bold font-serif text-forest-green">{operator.operator}</h3>
+                </div>
 
-              {/* Timeline items */}
-              {timelineItems.map((item, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                  transition={{ duration: 0.6, delay: 0.2 * index }}
-                  className="mb-10 relative"
-                >
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    animate={isInView ? { scale: 1 } : { scale: 0 }}
-                    transition={{
-                      type: "spring",
-                      stiffness: 300,
-                      damping: 10,
-                      delay: 0.5 + index * 0.2,
-                    }}
-                    className="absolute left-0 top-0 -translate-x-[10px]"
-                  >
-                    <div className="w-4 h-4 rounded-full bg-forest-green border-4 border-white"></div>
-                  </motion.div>
-                  <div className="pl-4">
-                    <div className="text-xl font-bold text-forest-green mb-1">{item.year}</div>
-                    <h3 className="text-lg font-bold font-serif text-forest-green">{item.product}</h3>
-                    <p className="text-gray-600">{item.status}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          ) : (
-            // Desktop timeline (horizontal)
-            <div className="relative">
-              {/* Vertical line */}
-              <motion.div
-                initial={{ scaleY: 0 }}
-                animate={isInView ? { scaleY: 1 } : { scaleY: 0 }}
-                transition={{ duration: 1.5, ease: "easeOut" }}
-                className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-forest-green/20 transform -translate-x-1/2 origin-top"
-              ></motion.div>
-
-              {/* Timeline items */}
-              {timelineItems.map((item, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                  transition={{ duration: 0.6, delay: 0.2 * index }}
-                  className={`flex items-center mb-12 ${index % 2 === 0 ? "flex-row" : "flex-row-reverse"}`}
-                >
-                  <div className={`w-1/2 ${index % 2 === 0 ? "pr-8 text-right" : "pl-8 text-left"}`}>
-                    <h3 className="text-xl font-bold font-serif text-forest-green">{item.product}</h3>
-                    <p className="text-gray-600">{item.status}</p>
-                  </div>
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    animate={isInView ? { scale: 1 } : { scale: 0 }}
-                    transition={{
-                      type: "spring",
-                      stiffness: 300,
-                      damping: 10,
-                      delay: 0.5 + index * 0.2,
-                    }}
-                    className="relative"
-                  >
-                    <div className="w-4 h-4 rounded-full bg-forest-green border-4 border-white"></div>
-                  </motion.div>
-                  <div className={`w-1/2 ${index % 2 === 0 ? "pl-8" : "pr-8 text-right"}`}>
-                    <div className="text-2xl font-bold text-forest-green">{item.year}</div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          )}
+                {/* Modules */}
+                <div className="p-4">
+                  {operator.modules.map((module, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
+                      transition={{ duration: 0.4, delay: 0.3 + i * 0.1 + index * 0.2 }}
+                      className="flex items-center justify-between py-3 border-b border-gray-100 last:border-0"
+                    >
+                      <div>
+                        <span className="font-medium text-forest-green">{module.name}</span>
+                        <p className="text-xs text-gray-500">{module.description}</p>
+                      </div>
+                      <div className="w-2 h-2 rounded-full bg-green-500"></div>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

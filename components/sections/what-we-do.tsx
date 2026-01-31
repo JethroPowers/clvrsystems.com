@@ -1,7 +1,8 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react"
-import { motion, AnimatePresence, useInView } from "framer-motion"
+import { motion, useInView } from "framer-motion"
+import { AnimatePresence } from "framer-motion"
 import {
   MessageSquare,
   Calendar,
@@ -33,51 +34,51 @@ export default function WhatWeDo() {
   const capabilities = [
     {
       icon: <MessageSquare className="h-8 w-8 text-white" />,
-      title: "Lead Capture AI",
-      description: "Conversational agents that engage and qualify every inbound inquiry—24/7, with zero manual effort.",
-      metric: "+30% inquiry qualification rate",
+      title: "Response Control",
+      description: "Inbound handled fast: qualify, route, and book—automatically, 24/7.",
+      metric: "< 2 min avg response time",
       subFeatures: [
-        { icon: <Bot />, label: "GPT-4o Agent" },
-        { icon: <Database />, label: "CRM Pipeline Sync" },
-        { icon: <Zap />, label: "Smart Lead Scoring" },
+        { icon: <Bot />, label: "Auto-Qualify" },
+        { icon: <Database />, label: "Smart Routing" },
+        { icon: <Zap />, label: "Instant Booking" },
       ],
-      systemMap: ["Inquiry", "AI Chat", "Qualification", "CRM", "Booking Trigger"],
+      systemMap: ["Inquiry", "Qualify", "Route", "Book", "Confirm"],
     },
     {
       icon: <Calendar className="h-8 w-8 text-white" />,
-      title: "Smart Scheduling",
-      description: "Automated booking flows that eliminate back-and-forth and reduce no-shows.",
+      title: "Booking Control",
+      description: "Reduce no-shows with deposits, reminders, and automated reschedules.",
       metric: "-35% no-show rate",
       subFeatures: [
-        { icon: <Layers />, label: "Multi-calendar Integration" },
-        { icon: <MessageSquare />, label: "SMS Reminders" },
-        { icon: <GitBranch />, label: "Rescheduling Logic" },
+        { icon: <Layers />, label: "Deposit Collection" },
+        { icon: <MessageSquare />, label: "Smart Reminders" },
+        { icon: <GitBranch />, label: "Auto-Reschedule" },
       ],
-      systemMap: ["Availability Check", "Booking", "Confirmation", "Reminders", "Follow-up"],
+      systemMap: ["Book", "Deposit", "Remind", "Confirm", "Reschedule"],
     },
     {
       icon: <Share className="h-8 w-8 text-white" />,
-      title: "Referral Engines",
-      description: "AI-driven loyalty programs that turn customers into growth accelerators.",
-      metric: "+22% referral conversion",
+      title: "Retention Control",
+      description: "Reactivation, loyalty programs, and tracked referrals that drive repeat revenue.",
+      metric: "+22% repeat bookings",
       subFeatures: [
-        { icon: <Users />, label: "Social Graph Analysis" },
-        { icon: <Zap />, label: "Incentive Optimization" },
-        { icon: <LineChart />, label: "Attribution Tracking" },
+        { icon: <Users />, label: "Reactivation Flows" },
+        { icon: <Zap />, label: "Loyalty Wallet" },
+        { icon: <LineChart />, label: "Referral Tracking" },
       ],
-      systemMap: ["Customer Event", "Referral Trigger", "Incentive Offer", "Tracking", "Reward"],
+      systemMap: ["Lapsed", "Trigger", "Incentive", "Track", "Convert"],
     },
     {
       icon: <BarChart3 className="h-8 w-8 text-white" />,
-      title: "Predictive Analytics",
-      description: "Forecast demand, churn risk, and resource needs with data-driven precision.",
-      metric: "93% forecast accuracy",
+      title: "Cash Control",
+      description: "Quote to change order to invoice to paid—same-day, every time.",
+      metric: "50% faster collections",
       subFeatures: [
-        { icon: <Cpu />, label: "ML Prediction Models" },
-        { icon: <Database />, label: "Multi-source Data Fusion" },
-        { icon: <Network />, label: "Anomaly Detection" },
+        { icon: <Cpu />, label: "Instant Quotes" },
+        { icon: <Database />, label: "Change Orders" },
+        { icon: <Network />, label: "Auto-Invoice" },
       ],
-      systemMap: ["Data Collection", "Processing", "Model Training", "Prediction", "Action"],
+      systemMap: ["Quote", "Approve", "Change", "Invoice", "Collect"],
     },
   ]
 
@@ -128,7 +129,7 @@ export default function WhatWeDo() {
         <div className="flex flex-col items-center text-center mb-8 md:mb-16">
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold font-serif text-white mb-3 md:mb-4">What We Do</h2>
           <p className="text-base md:text-lg text-white/90 max-w-2xl leading-relaxed">
-            We build modular AI systems that automate lead engagement, operations, and growth—across industries.
+            We build operators that own workflow choke points—where revenue leaks or money stalls.
           </p>
         </div>
 
@@ -267,65 +268,59 @@ function DesktopCapabilityCard({ capability, index }) {
           <p className="text-base text-white/90 leading-relaxed mb-6">{capability.description}</p>
 
           {/* Sub-features that appear on hover */}
-          <AnimatePresence>
-            {isHovered && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "auto" }}
-                exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: 0.3 }}
-                className="mb-6"
-              >
-                <div className="border-t border-white/20 pt-4 mb-4">
-                  <p className="text-sm text-white/80 mb-3">System Components</p>
-                  <div className="grid grid-cols-3 gap-2">
-                    {capability.subFeatures.map((feature, i) => (
-                      <div key={i} className="bg-white/10 rounded-lg p-3 flex flex-col items-center text-center">
-                        <div className="text-mint-green mb-2">{feature.icon}</div>
-                        <span className="text-xs text-white/90">{feature.label}</span>
-                      </div>
-                    ))}
-                  </div>
+          {isHovered && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              transition={{ duration: 0.3 }}
+              className="mb-6"
+            >
+              <div className="border-t border-white/20 pt-4 mb-4">
+                <p className="text-sm text-white/80 mb-3">System Components</p>
+                <div className="grid grid-cols-3 gap-2">
+                  {capability.subFeatures.map((feature, i) => (
+                    <div key={i} className="bg-white/10 rounded-lg p-3 flex flex-col items-center text-center">
+                      <div className="text-mint-green mb-2">{feature.icon}</div>
+                      <span className="text-xs text-white/90">{feature.label}</span>
+                    </div>
+                  ))}
                 </div>
+              </div>
 
-                {/* System Map - Fixed alignment issues */}
-                <div className="relative h-10 mb-4 overflow-hidden">
-                  <div className="absolute inset-0 flex items-center">
-                    <div className="h-0.5 w-full bg-white/20"></div>
-                  </div>
-                  <div className="relative flex justify-between">
-                    {capability.systemMap.map((step, i) => (
-                      <div
-                        key={i}
-                        className="flex flex-col items-center"
-                        style={{ width: `${100 / capability.systemMap.length}%` }}
-                      >
-                        <div className="w-3 h-3 rounded-full bg-mint-green"></div>
-                        <span className="text-[10px] text-white/80 mt-1 text-center whitespace-normal">{step}</span>
-                      </div>
-                    ))}
-                  </div>
+              {/* System Map - Fixed alignment issues */}
+              <div className="relative h-10 mb-4 overflow-hidden">
+                <div className="absolute inset-0 flex items-center">
+                  <div className="h-0.5 w-full bg-white/20"></div>
                 </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+                <div className="relative flex justify-between">
+                  {capability.systemMap.map((step, i) => (
+                    <div
+                      key={i}
+                      className="flex flex-col items-center"
+                      style={{ width: `${100 / capability.systemMap.length}%` }}
+                    >
+                      <div className="w-3 h-3 rounded-full bg-mint-green"></div>
+                      <span className="text-[10px] text-white/80 mt-1 text-center whitespace-normal">{step}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          )}
 
           {/* Metric that appears after delay */}
-          <AnimatePresence>
-            {showMetric && (
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.3 }}
-                className="mt-auto"
-              >
-                <div className="bg-mint-green/15 rounded-lg p-3 flex items-center justify-center">
-                  <span className="text-base text-mint-green font-bold">{capability.metric}</span>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+          {showMetric && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
+              className="mt-auto"
+            >
+              <div className="bg-mint-green/15 rounded-lg p-3 flex items-center justify-center">
+                <span className="text-base text-mint-green font-bold">{capability.metric}</span>
+              </div>
+            </motion.div>
+          )}
         </div>
 
         {/* Background pattern */}
