@@ -3,12 +3,10 @@
 import { useRef } from "react"
 import { motion, useInView } from "framer-motion"
 import { Shield, Lock, FileCheck, Eye, Database, Trash2 } from "lucide-react"
-import { useMediaQuery } from "@/hooks/use-media-query"
 
 export default function Security() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.2 })
-  const isMobile = useMediaQuery("(max-width: 768px)")
 
   // Security controls - honest wording without claiming certifications
   const securityControls = [
@@ -45,7 +43,7 @@ export default function Security() {
   ]
 
   return (
-    <section id="security" className="w-full py-16 sm:py-20 bg-forest-green text-white relative overflow-hidden">
+    <section id="security" className="w-full py-16 sm:py-20 bg-forest-green text-white relative overflow-hidden scroll-mt-20">
       <div className="container px-4 md:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -53,6 +51,7 @@ export default function Security() {
           transition={{ duration: 0.6 }}
           className="flex flex-col items-center text-center mb-8 sm:mb-12"
         >
+          <p className="text-xs sm:text-sm uppercase tracking-[0.16em] text-mint-green/90 mb-2">Trust Layer</p>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-serif text-white mb-3 sm:mb-4">
             Security Controls
           </h2>

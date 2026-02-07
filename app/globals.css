@@ -131,6 +131,10 @@ html {
   scroll-behavior: smooth;
 }
 
+section[id] {
+  scroll-margin-top: 88px;
+}
+
 /* Line height for better readability */
 .leading-relaxed {
   line-height: 1.45;

@@ -37,7 +37,7 @@ export default function HowWeDoIt() {
   ]
 
   return (
-    <section id="how-we-do-it" className="w-full py-20 md:py-32 bg-white">
+    <section id="how-we-do-it" className="w-full py-20 md:py-32 bg-white scroll-mt-20">
       <div className="container px-4 md:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -45,6 +45,7 @@ export default function HowWeDoIt() {
           transition={{ duration: 0.6 }}
           className="flex flex-col items-center text-center mb-16"
         >
+          <p className="text-xs sm:text-sm uppercase tracking-[0.16em] text-forest-green/70 mb-2">Install, Run, Prove</p>
           <h2 className="text-3xl md:text-4xl font-bold font-serif text-forest-green mb-4">How We Do It</h2>
           <p className="text-lg text-gray-600 max-w-2xl leading-relaxed">
             Every system we deploy follows a structured engineering pipeline. Operators inherit this process by default.

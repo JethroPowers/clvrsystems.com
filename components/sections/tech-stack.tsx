@@ -1,7 +1,7 @@
 "use client"
 
 import { useRef, useState } from "react"
-import { motion, useInView, AnimatePresence } from "framer-motion"
+import { motion, useInView } from "framer-motion"
 import { ChevronDown, ChevronUp, Info } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
@@ -11,16 +11,19 @@ import { useMediaQuery } from "@/hooks/use-media-query"
 function LogoImage({ domain, name, size = 32 }: { domain: string; name: string; size?: number }) {
   const [error, setError] = useState(false)
   const logoUrl = `https://logo.clearbit.com/${domain}`
+  const fallbackSize = size / 4
 
   return error ? (
     <div
-      className={`w-${size / 4} h-${size / 4} bg-gray-100 rounded-full flex items-center justify-center text-gray-400`}
+      className="bg-gray-100 rounded-full flex items-center justify-center text-gray-400"
+      style={{ width: fallbackSize, height: fallbackSize }}
     >
       <span className="text-xs font-medium">{name.charAt(0)}</span>
     </div>
   ) : (
     <div
-      className={`w-${size / 4} h-${size / 4} bg-gray-100 rounded-full flex items-center justify-center overflow-hidden`}
+      className="bg-gray-100 rounded-full flex items-center justify-center overflow-hidden"
+      style={{ width: fallbackSize, height: fallbackSize }}
     >
       <img
         src={logoUrl || "/placeholder.svg"}
@@ -139,9 +142,9 @@ const techStackData = [
         domain: "botpress.com",
       },
       {
-        name: "CMS (Blog Soon)",
+        name: "CMS (Docs + Briefings)",
         tools: "Sanity.io",
-        why: "Structured content for blogs, help docs, landing pages",
+        why: "Structured content for technical docs, briefings, and site updates",
         domain: "sanity.io",
       },
     ],
@@ -207,13 +210,6 @@ const techEcosystem = [
   { name: "Greenhouse", domain: "greenhouse.io" },
 ]
 
-const performanceStats = [
-  { label: "System Uptime", value: "99.9%", color: "bg-green-500" },
-  { label: "Escalation Response", value: "<5min", color: "bg-blue-500" },
-  { label: "Weekly Reports", value: "100%", color: "bg-purple-500" },
-  { label: "Data Portability", value: "Full", color: "bg-yellow-500" },
-]
-
 export default function TechStack() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.1 })
@@ -228,7 +224,7 @@ export default function TechStack() {
   }
 
   return (
-    <section id="stack" className="w-full py-16 sm:py-20 md:py-32 bg-gray-50">
+    <section id="stack" className="w-full py-16 sm:py-20 md:py-32 bg-gray-50 scroll-mt-20">
       <div className="container px-4 md:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -236,6 +232,7 @@ export default function TechStack() {
           transition={{ duration: 0.6 }}
           className="flex flex-col items-center text-center mb-12 sm:mb-16"
         >
+          <p className="text-xs sm:text-sm uppercase tracking-[0.16em] text-forest-green/70 mb-2">Infrastructure Detail</p>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-serif text-forest-green mb-4">Stack We Use</h2>
           <p className="text-base sm:text-lg text-gray-600 max-w-2xl leading-relaxed">
             Our technology stack is built for reliability, security, and scalability.
@@ -289,9 +286,18 @@ export default function TechStack() {
               className="bg-white rounded-lg shadow-sm overflow-hidden"
             >
               <motion.div
-                className="p-4 sm:p-6 cursor-pointer flex justify-between items-center"
+                className="p-4 sm:p-6 cursor-pointer flex justify-between items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-forest-green/40"
                 onClick={() => toggleSection(section.title)}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault()
+                    toggleSection(section.title)
+                  }
+                }}
                 whileHover={{ backgroundColor: "rgba(0, 0, 0, 0.02)" }}
+                role="button"
+                tabIndex={0}
+                aria-expanded={Boolean(expandedSections[section.title])}
               >
                 <h3 className="text-lg sm:text-xl font-bold font-serif text-forest-green">{section.title}</h3>
                 {expandedSections[section.title] ? (
@@ -311,10 +317,10 @@ export default function TechStack() {
                   <div className="px-4 sm:px-6 pb-4 sm:pb-6">
                     {section.layers && (
                       <div className="overflow-x-auto">
-                        <table className="w-full border-collapse">
+                        <table className="w-full min-w-[720px] border-collapse">
                           <thead>
                             <tr className="border-b border-gray-200">
-                              <th className="py-3 px-2 sm:px-4 text-left text-xs sm:text-sm font-medium text-gray-500">
+                              <th className="sticky left-0 z-20 bg-white py-3 px-2 sm:px-4 text-left text-xs sm:text-sm font-medium text-gray-500">
                                 Layer
                               </th>
                               <th className="py-3 px-2 sm:px-4 text-left text-xs sm:text-sm font-medium text-gray-500">
@@ -334,7 +340,7 @@ export default function TechStack() {
                                 transition={{ duration: 0.3, delay: 0.1 * layerIndex }}
                                 className="border-b border-gray-100 hover:bg-gray-50 group"
                               >
-                                <td className="py-3 px-2 sm:px-4">
+                                <td className="sticky left-0 z-10 bg-white group-hover:bg-gray-50 py-3 px-2 sm:px-4">
                                   <div className="flex items-center space-x-2 sm:space-x-3">
                                     <div className="relative w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-gray-100 flex items-center justify-center overflow-hidden">
                                       <LogoImage domain={layer.domain} name={layer.name} size={isMobile ? 24 : 32} />

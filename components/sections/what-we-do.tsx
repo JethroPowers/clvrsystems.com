@@ -1,8 +1,8 @@
 "use client"
 
+import type { MouseEvent as ReactMouseEvent, ReactNode, TouchEvent as ReactTouchEvent } from "react"
 import { useState, useEffect, useRef } from "react"
 import { motion, useInView } from "framer-motion"
-import { AnimatePresence } from "framer-motion"
 import {
   MessageSquare,
   Calendar,
@@ -23,15 +23,29 @@ import {
 import { cn } from "@/lib/utils"
 import { useMediaQuery } from "@/hooks/use-media-query"
 
+type CapabilityFeature = {
+  icon: ReactNode
+  label: string
+}
+
+type Capability = {
+  icon: ReactNode
+  title: string
+  description: string
+  metric: string
+  subFeatures: CapabilityFeature[]
+  systemMap: string[]
+}
+
 export default function WhatWeDo() {
-  const ref = useRef(null)
+  const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, amount: 0.1 })
   const isMobile = useMediaQuery("(max-width: 768px)")
   const [activeIndex, setActiveIndex] = useState(0)
   const [touchStart, setTouchStart] = useState(0)
   const [touchEnd, setTouchEnd] = useState(0)
 
-  const capabilities = [
+  const capabilities: Capability[] = [
     {
       icon: <Network className="h-8 w-8 text-white" />,
       title: "Orchestration",
@@ -83,11 +97,11 @@ export default function WhatWeDo() {
   ]
 
   // Handle touch events for swiping on mobile
-  const handleTouchStart = (e) => {
+  const handleTouchStart = (e: ReactTouchEvent<HTMLDivElement>) => {
     setTouchStart(e.targetTouches[0].clientX)
   }
 
-  const handleTouchMove = (e) => {
+  const handleTouchMove = (e: ReactTouchEvent<HTMLDivElement>) => {
     setTouchEnd(e.targetTouches[0].clientX)
   }
 
@@ -124,9 +138,10 @@ export default function WhatWeDo() {
   }, [isMobile, activeIndex, isPaused])
 
   return (
-    <section id="what-we-do" className="w-full py-12 md:py-20 lg:py-32 bg-forest-green text-white relative z-0">
+    <section id="what-we-do" className="w-full py-12 md:py-20 lg:py-32 bg-forest-green text-white relative z-0 scroll-mt-20">
       <div className="container px-4 md:px-6">
         <div className="flex flex-col items-center text-center mb-8 md:mb-16">
+          <p className="text-xs sm:text-sm uppercase tracking-[0.16em] text-mint-green/90 mb-2">System Functions</p>
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold font-serif text-white mb-3 md:mb-4">What We Do</h2>
           <p className="text-base md:text-lg text-white/90 max-w-2xl leading-relaxed">
             We build systems-level AI infrastructure that orchestrates, decides, enforces, and proves—across critical workflows.
@@ -137,7 +152,7 @@ export default function WhatWeDo() {
         {!isMobile && (
           <div className="hidden md:grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
             {capabilities.map((capability, index) => (
-              <DesktopCapabilityCard key={index} capability={capability} index={index} />
+              <DesktopCapabilityCard key={index} capability={capability} />
             ))}
           </div>
         )}
@@ -209,13 +224,13 @@ export default function WhatWeDo() {
 }
 
 // Desktop Card Component
-function DesktopCapabilityCard({ capability, index }) {
+function DesktopCapabilityCard({ capability }: { capability: Capability }) {
   const [isHovered, setIsHovered] = useState(false)
   const [showMetric, setShowMetric] = useState(false)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
 
   // Handle mouse movement for 3D effect
-  const handleMouseMove = (e) => {
+  const handleMouseMove = (e: ReactMouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect()
     const x = (e.clientX - rect.left) / rect.width - 0.5
     const y = (e.clientY - rect.top) / rect.height - 0.5
@@ -224,7 +239,7 @@ function DesktopCapabilityCard({ capability, index }) {
 
   // Show metric after delay
   useEffect(() => {
-    let timer
+    let timer: ReturnType<typeof setTimeout> | undefined
     if (isHovered) {
       timer = setTimeout(() => {
         setShowMetric(true)
@@ -338,8 +353,8 @@ function DesktopCapabilityCard({ capability, index }) {
 }
 
 // Mobile Card Component with enhanced animations
-function MobileCapabilityCard({ capability, isActive }) {
-  const cardRef = useRef(null)
+function MobileCapabilityCard({ capability, isActive }: { capability: Capability; isActive: boolean }) {
+  const cardRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(cardRef, { once: true, amount: 0.2 })
 
   return (

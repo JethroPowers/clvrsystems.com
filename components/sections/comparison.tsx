@@ -4,12 +4,10 @@ import { useRef } from "react"
 import { motion, useInView } from "framer-motion"
 import { Check, X, Info } from "lucide-react"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
-import { useMediaQuery } from "@/hooks/use-media-query"
 
 export default function Comparison() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.2 })
-  const isMobile = useMediaQuery("(max-width: 768px)")
 
   const comparisonData = [
     {
@@ -57,7 +55,7 @@ export default function Comparison() {
   ]
 
   return (
-    <section id="comparison" className="w-full py-20 md:py-32 bg-white">
+    <section id="comparison" className="w-full py-20 md:py-32 bg-white scroll-mt-20">
       <div className="container px-4 md:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -65,6 +63,7 @@ export default function Comparison() {
           transition={{ duration: 0.6 }}
           className="flex flex-col items-center text-center mb-10"
         >
+          <p className="text-xs sm:text-sm uppercase tracking-[0.16em] text-forest-green/70 mb-2">Positioning</p>
           <h2 className="text-3xl md:text-4xl font-bold font-serif text-forest-green mb-4">Our Position</h2>
           <p className="text-lg text-gray-600 max-w-2xl leading-relaxed mb-2">
             CLVR delivers systems with enforcement and operators. Agencies sell hours. SaaS sells seats.
@@ -74,10 +73,10 @@ export default function Comparison() {
         {/* Responsive Table for All Devices */}
         <div ref={ref} className="max-w-4xl mx-auto overflow-hidden rounded-lg shadow-md">
           <div className="overflow-x-auto">
-            <table className="w-full border-collapse">
+            <table className="w-full min-w-[680px] border-collapse">
               <thead>
                 <tr>
-                  <th className="p-3 md:p-4 text-left font-serif bg-forest-green text-white rounded-tl-lg">
+                  <th className="sticky left-0 z-20 p-3 md:p-4 text-left font-serif bg-forest-green text-white rounded-tl-lg">
                     <span className="text-sm md:text-base">Operator Doctrine</span>
                   </th>
                   <th className="p-3 md:p-4 text-center font-serif bg-forest-green text-white relative">
@@ -94,8 +93,12 @@ export default function Comparison() {
               </thead>
               <tbody>
                 {comparisonData.map((row, index) => (
-                  <tr key={index} className={index % 2 === 0 ? "bg-white" : "bg-gray-50"}>
-                    <td className="p-3 md:p-4 border-b border-gray-100 font-medium text-forest-green">
+                  <tr key={index} className={index % 2 === 0 ? "bg-white group" : "bg-gray-50 group"}>
+                    <td
+                      className={`sticky left-0 z-10 p-3 md:p-4 border-b border-gray-100 font-medium text-forest-green group-hover:bg-gray-50 ${
+                        index % 2 === 0 ? "bg-white" : "bg-gray-50"
+                      }`}
+                    >
                       <div className="flex items-center">
                         <span className="font-bold text-xs md:text-sm">{row.capability}</span>
                         <TooltipProvider>

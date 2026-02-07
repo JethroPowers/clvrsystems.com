@@ -19,13 +19,13 @@ export default function Hero() {
 
   // Parallax effect values - reduced intensity to prevent visual inconsistencies
   const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"])
-  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "60%"])
+  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "40%"])
   const opacity = useTransform(scrollYProgress, [0, 0.9], [1, 0])
 
   // Grid animation for background
   useEffect(() => {
     const gridCells = document.querySelectorAll(".grid-cell")
-    gridCells.forEach((cell, index) => {
+    gridCells.forEach((cell) => {
       const delay = Math.random() * 2
       const htmlCell = cell as HTMLElement
       htmlCell.style.animationDelay = `${delay}s`
@@ -35,7 +35,7 @@ export default function Hero() {
   // Icon animation variants
   const iconVariants = {
     hidden: { opacity: 0, scale: 0.8 },
-    visible: { opacity: 0.8, scale: 1 },
+    visible: { opacity: 0.65, scale: 1 },
   }
 
   // Floating animation for icons
@@ -45,7 +45,7 @@ export default function Hero() {
       duration: 4,
       repeat: Number.POSITIVE_INFINITY,
       repeatType: "reverse" as const,
-      ease: "easeInOut",
+      ease: [0.42, 0, 0.58, 1] as const,
     },
   }
 
@@ -61,25 +61,34 @@ export default function Hero() {
       }}
     >
       {/* Animated grid background */}
-      <div className="absolute inset-0 opacity-10">
+      <div className="absolute inset-0 opacity-5">
         <div className="grid grid-cols-6 sm:grid-cols-12 h-full">
           {Array.from({ length: 144 }).map((_, i) => (
             <div
               key={i}
               className="grid-cell border border-white/20 transition-opacity duration-1000"
-              style={{ opacity: Math.random() > 0.7 ? 0.8 : 0.2 }}
+              style={{ opacity: Math.random() > 0.7 ? 0.55 : 0.12 }}
             ></div>
           ))}
         </div>
       </div>
 
       {/* Parallax content */}
-      <motion.div style={{ y: backgroundY }} className="absolute inset-0 opacity-5">
+      <motion.div style={{ y: backgroundY }} className="absolute inset-0 opacity-[0.03]">
         <div className="h-full w-full bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.1)_0%,transparent_70%)]"></div>
       </motion.div>
 
       <div className="container px-4 md:px-6 relative z-10">
         <motion.div style={{ y: textY, opacity }} className="max-w-3xl space-y-6">
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="text-xs sm:text-sm uppercase tracking-[0.2em] text-mint-green/90 font-medium"
+          >
+            Systems Company
+          </motion.p>
+
           {/* Floating icons - desktop version */}
           {!isMobile && (
             <>
@@ -162,7 +171,7 @@ export default function Hero() {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-serif tracking-tight"
           >
-            AI Systems Infrastructure for Critical Workflows.
+            Systems-Level AI Infrastructure, Deployed Through Operators.
           </motion.h1>
 
           <motion.p
@@ -171,7 +180,7 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
             className="text-lg sm:text-xl md:text-2xl text-white/80 leading-relaxed"
           >
-            We design and operate systems at revenue and money workflow choke points. Outcomes are delivered through specialised operators that run end-to-end.
+            We design and operate systems at revenue and money workflow choke points. Specialised operators run these systems end-to-end in production.
           </motion.p>
 
           <motion.div
@@ -183,7 +192,7 @@ export default function Hero() {
             <Link href="#products" className={`${isMobile ? "w-full" : ""}`}>
               <Button
                 size="lg"
-                className="bg-mint-green text-forest-green hover:bg-mint-green/90 transition-all duration-300 transform hover:scale-105 w-full"
+                className="bg-mint-green text-forest-green hover:bg-mint-green/90 transition-all duration-300 transform hover:scale-105 w-full focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-forest-green"
               >
                 Explore Operators
               </Button>
@@ -197,7 +206,7 @@ export default function Hero() {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-white text-white hover:bg-white/10 transition-all duration-300 transform hover:scale-105 w-full backdrop-blur-sm bg-transparent"
+                className="border-white text-white hover:bg-white/10 transition-all duration-300 transform hover:scale-105 w-full backdrop-blur-sm bg-transparent focus-visible:ring-2 focus-visible:ring-mint-green focus-visible:ring-offset-2 focus-visible:ring-offset-forest-green"
               >
                 Talk to Us About Systems
               </Button>

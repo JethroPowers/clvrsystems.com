@@ -1,7 +1,6 @@
 "use client"
 
 import type React from "react"
-import { AnimatePresence } from "framer-motion"
 import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
@@ -100,7 +99,7 @@ export default function Header() {
           <Link
             href="#"
             onClick={(e) => handleNavClick(e, "#")}
-            className="text-xl font-bold font-serif text-white flex items-center gap-2"
+            className="text-xl font-bold font-serif text-white flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mint-green/80 focus-visible:ring-offset-2 focus-visible:ring-offset-forest-green rounded-sm"
           >
             <span>CLVR</span>
             <span className="font-normal">Automations</span>
@@ -120,7 +119,7 @@ export default function Header() {
                 href={item.href}
                 onClick={(e) => handleNavClick(e, item.href)}
                 className={cn(
-                  "text-sm font-medium text-white hover:text-white transition-colors relative group px-1 py-1",
+                  "text-sm font-medium text-white hover:text-white transition-colors relative group px-1 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mint-green/80 focus-visible:ring-offset-2 focus-visible:ring-offset-forest-green rounded-sm",
                   (activeSection === item.href.replace("#", "") || (activeSection === "" && item.href === "#")) &&
                     "after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-mint-green",
                 )}
@@ -140,8 +139,8 @@ export default function Header() {
             className="hidden sm:block"
           >
             <a href="https://tally.so/r/mZGbo5" target="_blank" rel="noopener noreferrer">
-              <Button className="bg-mint-green text-forest-green hover:bg-mint-green/90 transition-all duration-300">
-                Book Systems Audit
+              <Button className="bg-mint-green text-forest-green hover:bg-mint-green/90 transition-all duration-300 focus-visible:ring-2 focus-visible:ring-mint-green/80 focus-visible:ring-offset-2 focus-visible:ring-offset-forest-green">
+                Talk to Us About Systems
               </Button>
             </a>
           </motion.div>
@@ -153,7 +152,7 @@ export default function Header() {
               size="icon"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-              className="text-white hover:bg-forest-green/50"
+              className="text-white hover:bg-forest-green/50 focus-visible:ring-2 focus-visible:ring-mint-green/80 focus-visible:ring-offset-2 focus-visible:ring-offset-forest-green"
             >
               {mobileMenuOpen ? <X /> : <Menu />}
             </Button>
@@ -181,7 +180,7 @@ export default function Header() {
                   href={item.href}
                   onClick={(e) => handleNavClick(e, item.href)}
                   className={cn(
-                    "block py-4 text-xl font-medium text-white hover:text-mint-green transition-colors border-b border-white/10",
+                    "block py-4 text-xl font-medium text-white hover:text-mint-green transition-colors border-b border-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mint-green/80 focus-visible:ring-offset-2 focus-visible:ring-offset-forest-green rounded-sm",
                     (activeSection === item.href.replace("#", "") || (activeSection === "" && item.href === "#")) &&
                       "text-mint-green",
                   )}
@@ -198,8 +197,8 @@ export default function Header() {
               className="mt-auto"
             >
               <a href="https://tally.so/r/mZGbo5" target="_blank" rel="noopener noreferrer">
-                <Button className="w-full bg-mint-green text-forest-green hover:bg-mint-green/90 py-6 text-lg">
-                  Book Systems Audit
+                <Button className="w-full bg-mint-green text-forest-green hover:bg-mint-green/90 py-6 text-lg focus-visible:ring-2 focus-visible:ring-mint-green/80 focus-visible:ring-offset-2 focus-visible:ring-offset-forest-green">
+                  Talk to Us About Systems
                 </Button>
               </a>
             </motion.div>

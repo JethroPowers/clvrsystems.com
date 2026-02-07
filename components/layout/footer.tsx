@@ -9,7 +9,7 @@ export default function Footer() {
     { label: "Home", href: "#home" },
     { label: "What We Do", href: "#what-we-do" },
     { label: "How We Do It", href: "#how-we-do-it" },
-    { label: "Products", href: "#products" },
+    { label: "Operators", href: "#products" },
     { label: "Stack", href: "#stack" },
     { label: "FAQ", href: "#faq" },
     { label: "Contact", href: "#contact" },
@@ -31,7 +31,7 @@ export default function Footer() {
               <span className="text-xl font-bold font-serif text-white">CLVR</span>
               <span className="text-xl font-normal font-serif text-white/80">Automations</span>
             </div>
-            <p className="text-sm">Operators that control revenue + money workflows.</p>
+            <p className="text-sm">Systems-level AI infrastructure deployed through specialised operators.</p>
             <div className="flex gap-4">
               {socialLinks.map((social, index) => (
                 <Link

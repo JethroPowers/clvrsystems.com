@@ -33,7 +33,7 @@ export default function BlogTeaser() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-3xl md:text-4xl font-bold font-serif mb-4"
           >
-            Insights — Coming Soon
+            Systems Briefings
           </motion.h2>
 
           <motion.p
@@ -42,7 +42,7 @@ export default function BlogTeaser() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-xl text-white/80 mb-8 leading-relaxed"
           >
-            Subscribe to be the first to receive our expert insights on AI system infrastructure.
+            Receive technical briefings on system reliability, enforcement, and operator performance.
           </motion.p>
 
           <motion.div

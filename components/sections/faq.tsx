@@ -3,12 +3,8 @@
 import { useState } from "react"
 import { ChevronDown, ChevronUp } from "lucide-react"
 import { motion } from "framer-motion"
-import { useMediaQuery } from "@/hooks/use-media-query"
-import { AnimatePresence } from "framer-motion"
 
 export default function Faq() {
-  const isMobile = useMediaQuery("(max-width: 768px)")
-
   const faqItems = [
     {
       question: "Do we need to change our existing tools?",
@@ -43,9 +39,10 @@ export default function Faq() {
   ]
 
   return (
-    <section id="faq" className="w-full py-12 sm:py-16 md:py-24 lg:py-32 bg-gray-50">
+    <section id="faq" className="w-full py-12 sm:py-16 md:py-24 lg:py-32 bg-gray-50 scroll-mt-20">
       <div className="container px-4 md:px-6">
         <div className="flex flex-col items-center text-center mb-8 sm:mb-12">
+          <p className="text-xs sm:text-sm uppercase tracking-[0.16em] text-forest-green/70 mb-2">Operational Clarity</p>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-serif text-forest-green mb-3 sm:mb-4">FAQ</h2>
           <p className="text-base sm:text-lg text-gray-600 max-w-2xl leading-relaxed">
             Common questions about how our operators work.
@@ -73,7 +70,7 @@ function FaqItem({ question, answer, index }: { question: string; answer: string
     >
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full px-6 py-4 flex justify-between items-center text-left focus:outline-none"
+        className="w-full px-6 py-4 flex justify-between items-center text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-forest-green/50 focus-visible:ring-inset"
       >
         <h3 className="font-bold font-serif text-forest-green text-sm sm:text-base">{question}</h3>
         <div className="flex-shrink-0 ml-2">
