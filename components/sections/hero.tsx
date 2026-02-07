@@ -162,7 +162,7 @@ export default function Hero() {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-serif tracking-tight"
           >
-            {isMobile ? "Operators that control revenue + money workflows." : "Operators that control revenue + money workflows."}
+            AI Systems Infrastructure for Critical Workflows.
           </motion.h1>
 
           <motion.p
@@ -171,17 +171,23 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
             className="text-lg sm:text-xl md:text-2xl text-white/80 leading-relaxed"
           >
-            {isMobile
-              ? "Choose an operator. Outcomes enforced. Run with minimal effort."
-              : "Choose an operator. Outcomes enforced. Run with minimal effort."}
+            We design and operate systems at revenue and money workflow choke points. Outcomes are delivered through specialised operators that run end-to-end.
           </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-            className={`flex ${isMobile ? "flex-col" : "flex-wrap"} gap-3 pt-4`}
+            className={`flex ${isMobile ? "flex-col" : "flex-row"} gap-3 pt-4`}
           >
+            <Link href="#products" className={`${isMobile ? "w-full" : ""}`}>
+              <Button
+                size="lg"
+                className="bg-mint-green text-forest-green hover:bg-mint-green/90 transition-all duration-300 transform hover:scale-105 w-full"
+              >
+                Explore Operators
+              </Button>
+            </Link>
             <a
               href="https://tally.so/r/mZGbo5"
               target="_blank"
@@ -190,57 +196,12 @@ export default function Hero() {
             >
               <Button
                 size="lg"
-                className="bg-mint-green text-forest-green hover:bg-mint-green/90 transition-all duration-300 transform hover:scale-105 w-full"
+                variant="outline"
+                className="border-white text-white hover:bg-white/10 transition-all duration-300 transform hover:scale-105 w-full backdrop-blur-sm bg-transparent"
               >
-                Book a 15-min Systems Audit
+                Talk to Us About Systems
               </Button>
             </a>
-            
-            {/* Secondary operator buttons */}
-            <div className={`flex ${isMobile ? "flex-col" : "flex-row"} gap-3 ${isMobile ? "w-full" : ""}`}>
-              <a
-                href="https://verified.clvrautomations.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`${isMobile ? "w-full" : ""}`}
-              >
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="border-white text-white hover:bg-white/10 transition-all duration-300 transform hover:scale-105 w-full backdrop-blur-sm bg-transparent"
-                >
-                  CLVR Verified
-                </Button>
-              </a>
-              <a
-                href="https://emilia.clvrautomations.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`${isMobile ? "w-full" : ""}`}
-              >
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="border-white text-white hover:bg-white/10 transition-all duration-300 transform hover:scale-105 w-full backdrop-blur-sm bg-transparent"
-                >
-                  Emilia AI
-                </Button>
-              </a>
-              <a
-                href="https://marginflow.clvrautomations.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`${isMobile ? "w-full" : ""}`}
-              >
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="border-white text-white hover:bg-white/10 transition-all duration-300 transform hover:scale-105 w-full backdrop-blur-sm bg-transparent"
-                >
-                  MarginFlow
-                </Button>
-              </a>
-            </div>
           </motion.div>
 
           {/* Scroll indicator - only visible on desktop */}

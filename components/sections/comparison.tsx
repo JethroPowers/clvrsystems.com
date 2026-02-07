@@ -67,7 +67,7 @@ export default function Comparison() {
         >
           <h2 className="text-3xl md:text-4xl font-bold font-serif text-forest-green mb-4">Our Position</h2>
           <p className="text-lg text-gray-600 max-w-2xl leading-relaxed mb-2">
-            Operators own outcomes. Agencies sell hours. SaaS sells seats. Here's why we build differently.
+            CLVR delivers systems with enforcement and operators. Agencies sell hours. SaaS sells seats.
           </p>
         </motion.div>
 
@@ -165,7 +165,7 @@ export default function Comparison() {
           className="mt-12 text-center"
         >
           <p className="text-forest-green font-medium max-w-2xl mx-auto">
-            With CLVR operators, you get enforceable outcomes at workflow choke points—not dashboards, not hours, not seats.
+            CLVR is the systems layer. Operators are how outcomes happen.
           </p>
         </motion.div>
       </div>

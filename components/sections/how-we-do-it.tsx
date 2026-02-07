@@ -11,27 +11,27 @@ export default function HowWeDoIt() {
   const steps = [
     {
       number: "01",
-      title: "Baseline the Leak",
+      title: "Baseline",
       description:
-        "Capture your current workflow and baseline KPIs—see exactly where revenue leaks or money stalls.",
+        "Map the workflow and capture current KPIs. Identify where revenue leaks or money stalls.",
       icon: <Network className="h-8 w-8 text-forest-green" />,
     },
     {
       number: "02",
-      title: "Install the Operator",
-      description: "Deploy integrations, rules, policies, and tests—configured for your specific workflow.",
+      title: "Install",
+      description: "Configure integrations, rules, policies, and stop conditions. Deploy the operator into your environment.",
       icon: <Layers className="h-8 w-8 text-forest-green" />,
     },
     {
       number: "03",
-      title: "Run Automatically",
-      description: "Operators enforce decisions with stop conditions and escalation paths—no daily user effort.",
+      title: "Run",
+      description: "The system operates autonomously with enforcement, escalation paths, and zero daily user effort.",
       icon: <Cpu className="h-8 w-8 text-forest-green" />,
     },
     {
       number: "04",
-      title: "Prove + Improve",
-      description: "Weekly reporting shows outcomes. We tune the operator based on real data, not guesses.",
+      title: "Prove",
+      description: "Weekly outcome reporting. Continuous tuning based on real data, not assumptions.",
       icon: <LineChart className="h-8 w-8 text-forest-green" />,
     },
   ]
@@ -47,7 +47,7 @@ export default function HowWeDoIt() {
         >
           <h2 className="text-3xl md:text-4xl font-bold font-serif text-forest-green mb-4">How We Do It</h2>
           <p className="text-lg text-gray-600 max-w-2xl leading-relaxed">
-            Every operator follows the same deployment pipeline—baseline, install, run, prove.
+            Every system we deploy follows a structured engineering pipeline. Operators inherit this process by default.
           </p>
         </motion.div>
 

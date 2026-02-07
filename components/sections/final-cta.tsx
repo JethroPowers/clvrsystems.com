@@ -25,7 +25,7 @@ export default function FinalCta() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-3xl md:text-4xl font-bold font-serif text-forest-green mb-6"
           >
-            Pick the operator. Get a private walkthrough.
+            Ready to see what a system looks like?
           </motion.h2>
 
           <motion.p
@@ -34,7 +34,7 @@ export default function FinalCta() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-xl text-gray-600 mb-8 leading-relaxed"
           >
-            See which operator fits your workflow. Book a 15-minute systems audit.
+            Explore an operator or talk to us about your infrastructure needs.
           </motion.p>
 
           {/* Operator buttons */}
@@ -86,7 +86,7 @@ export default function FinalCta() {
                 size="lg"
                 className="bg-mint-green text-forest-green hover:bg-mint-green/90 transition-all duration-300"
               >
-                Book a 15-min Systems Audit
+                Talk to Us About Systems
               </Button>
             </a>
           </motion.div>

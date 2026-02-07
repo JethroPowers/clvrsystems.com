@@ -33,52 +33,52 @@ export default function WhatWeDo() {
 
   const capabilities = [
     {
-      icon: <MessageSquare className="h-8 w-8 text-white" />,
-      title: "Response Control",
-      description: "Inbound handled fast: qualify, route, and book—automatically, 24/7.",
-      metric: "< 2 min avg response time",
+      icon: <Network className="h-8 w-8 text-white" />,
+      title: "Orchestration",
+      description: "Multi-step workflow coordination across systems, APIs, and teams—sequenced and reliable.",
+      metric: "End-to-end coverage",
       subFeatures: [
-        { icon: <Bot />, label: "Auto-Qualify" },
-        { icon: <Database />, label: "Smart Routing" },
-        { icon: <Zap />, label: "Instant Booking" },
+        { icon: <Layers />, label: "Workflow Engine" },
+        { icon: <GitBranch />, label: "Branching Logic" },
+        { icon: <Zap />, label: "Event Triggers" },
       ],
-      systemMap: ["Inquiry", "Qualify", "Route", "Book", "Confirm"],
+      systemMap: ["Trigger", "Route", "Execute", "Confirm", "Log"],
     },
     {
-      icon: <Calendar className="h-8 w-8 text-white" />,
-      title: "Booking Control",
-      description: "Reduce no-shows with deposits, reminders, and automated reschedules.",
-      metric: "-35% no-show rate",
+      icon: <Cpu className="h-8 w-8 text-white" />,
+      title: "Decision Automation",
+      description: "Rule-based and model-assisted decisions executed at speed, without manual review bottlenecks.",
+      metric: "Deterministic outcomes",
       subFeatures: [
-        { icon: <Layers />, label: "Deposit Collection" },
-        { icon: <MessageSquare />, label: "Smart Reminders" },
-        { icon: <GitBranch />, label: "Auto-Reschedule" },
+        { icon: <Bot />, label: "Rules Engine" },
+        { icon: <Database />, label: "Data Validation" },
+        { icon: <LineChart />, label: "Scoring Models" },
       ],
-      systemMap: ["Book", "Deposit", "Remind", "Confirm", "Reschedule"],
-    },
-    {
-      icon: <Share className="h-8 w-8 text-white" />,
-      title: "Retention Control",
-      description: "Reactivation, loyalty programs, and tracked referrals that drive repeat revenue.",
-      metric: "+22% repeat bookings",
-      subFeatures: [
-        { icon: <Users />, label: "Reactivation Flows" },
-        { icon: <Zap />, label: "Loyalty Wallet" },
-        { icon: <LineChart />, label: "Referral Tracking" },
-      ],
-      systemMap: ["Lapsed", "Trigger", "Incentive", "Track", "Convert"],
+      systemMap: ["Input", "Evaluate", "Decide", "Act", "Record"],
     },
     {
       icon: <BarChart3 className="h-8 w-8 text-white" />,
-      title: "Cash Control",
-      description: "Quote to change order to invoice to paid—same-day, every time.",
-      metric: "50% faster collections",
+      title: "Enforcement",
+      description: "Systems that approve, block, or escalate at workflow choke points—where revenue leaks or money stalls.",
+      metric: "Zero drift tolerance",
       subFeatures: [
-        { icon: <Cpu />, label: "Instant Quotes" },
-        { icon: <Database />, label: "Change Orders" },
-        { icon: <Network />, label: "Auto-Invoice" },
+        { icon: <Users />, label: "Approval Gates" },
+        { icon: <Share />, label: "Stop Conditions" },
+        { icon: <MessageSquare />, label: "Escalation Paths" },
       ],
-      systemMap: ["Quote", "Approve", "Change", "Invoice", "Collect"],
+      systemMap: ["Check", "Gate", "Enforce", "Escalate", "Resolve"],
+    },
+    {
+      icon: <Calendar className="h-8 w-8 text-white" />,
+      title: "Proof + Auditability",
+      description: "Every action logged, every outcome measured. Weekly reporting proves what the system delivered.",
+      metric: "Full audit trail",
+      subFeatures: [
+        { icon: <Database />, label: "Event Logging" },
+        { icon: <LineChart />, label: "Outcome Reports" },
+        { icon: <Cpu />, label: "Continuous Tuning" },
+      ],
+      systemMap: ["Capture", "Store", "Measure", "Report", "Tune"],
     },
   ]
 
@@ -129,7 +129,7 @@ export default function WhatWeDo() {
         <div className="flex flex-col items-center text-center mb-8 md:mb-16">
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold font-serif text-white mb-3 md:mb-4">What We Do</h2>
           <p className="text-base md:text-lg text-white/90 max-w-2xl leading-relaxed">
-            We build operators that own workflow choke points—where revenue leaks or money stalls.
+            We build systems-level AI infrastructure that orchestrates, decides, enforces, and proves—across critical workflows.
           </p>
         </div>
 

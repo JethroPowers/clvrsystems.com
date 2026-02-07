@@ -31,7 +31,7 @@ export default function Products() {
   const products = [
     {
       title: "CLVR Verified",
-      description: "Mandatory approval gate + proof layer for money movement.",
+      description: "Approval gate and proof layer for money movement workflows. Enforces sign-off, documentation, and reconciliation.",
       status: "Live / Pilot",
       statusColor: "bg-green-500",
       cta: "Start a Pilot",
@@ -46,7 +46,7 @@ export default function Products() {
     },
     {
       title: "Emilia AI",
-      description: "Loyalty wallet + referrals + reactivation for beauty pros.",
+      description: "Retention and loyalty operator for aesthetic clinics. Manages wallet credits, tracked referrals, and reactivation flows.",
       status: "Waitlist / Early Access",
       statusColor: "bg-amber-500",
       cta: "Join Waitlist",
@@ -61,7 +61,7 @@ export default function Products() {
     },
     {
       title: "MarginFlow",
-      description: "Quote-to-cash operator for contractors: same-day quotes, signed extras, same-day invoices, collections.",
+      description: "Quote-to-cash enforcement for contractors. Same-day quotes, signed change orders, automated invoicing, and collections.",
       status: "Live",
       statusColor: "bg-green-500",
       cta: "Book Walkthrough",
@@ -85,9 +85,9 @@ export default function Products() {
           transition={{ duration: 0.6 }}
           className="flex flex-col items-center text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold font-serif text-forest-green mb-4">Operators</h2>
+          <h2 className="text-3xl md:text-4xl font-bold font-serif text-forest-green mb-4">Operators We Run</h2>
           <p className="text-lg text-gray-600 max-w-2xl leading-relaxed">
-            Three operators, each owning a workflow choke point. Pick the one that matches your leak.
+            CLVR systems are delivered through specialised operators. Each one owns a specific workflow and runs it end-to-end.
           </p>
         </motion.div>
 
