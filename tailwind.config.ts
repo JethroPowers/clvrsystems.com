@@ -15,7 +15,7 @@ const config = {
       center: true,
       padding: "2rem",
       screens: {
-        "2xl": "1400px",
+        "2xl": "1180px",
       },
     },
     extend: {
@@ -53,17 +53,25 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // Custom colors for CLVR Automations
+        "near-black": "#0f0f0f",
+        "deep-charcoal": "#111111",
+        "warm-off-white": "#f3f1ec",
+        "muted-silver": "#8a8a8a",
+        graphite: "#2a2a2a",
         "forest-green": "#064E3B",
         "mint-green": "#A7F3D0",
-        lavender: "#DDD6FE",
-        teal: "#5EEAD4",
       },
-      /* Fixed the corrupted borderRadius configuration */
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+      },
+      boxShadow: {
+        panel: "0 36px 100px -60px rgba(0, 0, 0, 0.95)",
+      },
+      backgroundImage: {
+        "hero-grid":
+          "linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px)",
       },
       keyframes: {
         "accordion-down": {
@@ -80,8 +88,9 @@ const config = {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
       fontFamily: {
-        sans: ["var(--font-inter)"],
-        serif: ["var(--font-roboto-slab)"],
+        sans: ["var(--font-manrope)"],
+        serif: ["var(--font-space-grotesk)"],
+        display: ["var(--font-space-grotesk)"],
       },
     },
   },

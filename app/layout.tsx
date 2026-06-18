@@ -1,25 +1,44 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Inter, Roboto_Slab } from "next/font/google"
+import { Manrope, Space_Grotesk } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 
-const inter = Inter({
+const manrope = Manrope({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-manrope",
   display: "swap",
 })
 
-const robotoSlab = Roboto_Slab({
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
-  variable: "--font-roboto-slab",
+  variable: "--font-space-grotesk",
   display: "swap",
 })
 
 export const metadata: Metadata = {
-  title: "CLVR Automations | AI System Infrastructure",
-  description: "We build AI system infrastructures for businesses that need reliable, scalable AI solutions.",
-    generator: 'v0.app'
+  metadataBase: new URL("https://clvrsystems.com"),
+  title: "CLVR Systems | Operating Systems for Real-World Business Workflows",
+  description:
+    "CLVR Systems builds operating systems that help businesses control follow-up, decisions, execution, and recorded outcomes across important workflows.",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "CLVR Systems",
+    description: "Operating systems for real-world business workflows.",
+    url: "https://clvrsystems.com",
+    siteName: "CLVR Systems",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "CLVR Systems | Operating Systems",
+    description: "CLVR builds systems that help businesses control important workflows.",
+  },
+  icons: {
+    icon: "/icon.svg",
+  },
 }
 
 export default function RootLayout({
@@ -29,11 +48,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-      </head>
-      <body className={`${inter.variable} ${robotoSlab.variable} font-sans`}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
+      <body className={`${manrope.variable} ${spaceGrotesk.variable} font-sans`}>
+        <ThemeProvider attribute="class" forcedTheme="light" enableSystem={false} disableTransitionOnChange>
           {children}
         </ThemeProvider>
       </body>

@@ -1,50 +1,48 @@
 "use client"
 
 import type React from "react"
-import { useState, useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import Link from "next/link"
-import { Button } from "@/components/ui/button"
+import { usePathname } from "next/navigation"
 import { Menu, X } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { motion } from "framer-motion"
 import { useScrollSpy } from "@/hooks/use-scroll-spy"
 
-// Navigation items
 const navItems = [
-  { href: "#", label: "Home" },
-  { href: "#what-we-do", label: "What We Do" },
-  { href: "#how-we-do-it", label: "How We Do It" },
-  { href: "#products", label: "Operators" },
-  { href: "#stack", label: "Stack" },
-  { href: "#faq", label: "FAQ" },
-  { href: "#contact", label: "Contact" },
+  { href: "/#core", label: "Core" },
+  { href: "/systems", label: "Systems" },
+  { href: "/verified", label: "Verified" },
+  { href: "/company", label: "Company" },
+  { href: "/#contact", label: "Contact" },
 ]
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const headerRef = useRef<HTMLElement>(null)
+  const pathname = usePathname()
 
-  // Use scroll spy to highlight current section
-  const activeSection = useScrollSpy(["", "what-we-do", "how-we-do-it", "products", "stack", "faq", "contact"], {
-    threshold: 0.3,
-    rootMargin: "-100px 0px -70% 0px",
-  })
+  const activeSection = useScrollSpy(
+    ["core", "systems", "verified", "contact"],
+    {
+      threshold: 0.24,
+      rootMargin: "-96px 0px -62% 0px",
+    },
+  )
 
-  // Handle scroll event to change header appearance
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10)
+      setIsScrolled(window.scrollY > 16)
     }
 
+    handleScroll()
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+  }, [pathname])
 
-  // Close mobile menu on resize
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth >= 1024 && mobileMenuOpen) {
+      if (window.innerWidth >= 1280 && mobileMenuOpen) {
         setMobileMenuOpen(false)
       }
     }
@@ -53,157 +51,175 @@ export default function Header() {
     return () => window.removeEventListener("resize", handleResize)
   }, [mobileMenuOpen])
 
-  // Handle smooth scrolling for navigation links
+  useEffect(() => {
+    document.body.style.overflow = mobileMenuOpen ? "hidden" : ""
+
+    return () => {
+      document.body.style.overflow = ""
+    }
+  }, [mobileMenuOpen])
+
+  const scrollToSection = (hash: string, url: string) => {
+    const element = document.querySelector(hash)
+    if (!element) return
+
+    const headerHeight = headerRef.current?.offsetHeight || 0
+    window.scrollTo({
+      top: element.getBoundingClientRect().top + window.scrollY - headerHeight,
+      behavior: "smooth",
+    })
+
+    history.replaceState({}, "", url)
+  }
+
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault()
     setMobileMenuOpen(false)
 
-    // If href is just "#", scroll to top
-    if (href === "#") {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      })
+    if (href === "/" && pathname === "/") {
+      e.preventDefault()
+      window.scrollTo({ top: 0, behavior: "smooth" })
+      history.replaceState({}, "", "/")
       return
     }
 
-    const element = document.querySelector(href)
-    if (element) {
-      const headerHeight = headerRef.current?.offsetHeight || 0
-      window.scrollTo({
-        top: element.getBoundingClientRect().top + window.scrollY - headerHeight,
-        behavior: "smooth",
-      })
-
-      // Update URL without page reload
-      history.pushState({}, "", href)
+    if (href.startsWith("/#") && pathname === "/") {
+      e.preventDefault()
+      scrollToSection(`#${href.split("#")[1]}`, href)
+      return
     }
+
+    if (href.startsWith("#")) {
+      e.preventDefault()
+      scrollToSection(href, href)
+    }
+  }
+
+  const isActive = (item: (typeof navItems)[number]) => {
+    if (item.href === "/systems") {
+      return pathname === "/systems" || (pathname === "/" && activeSection === "systems")
+    }
+
+    if (item.href === "/verified") {
+      return pathname === "/verified" || (pathname === "/" && activeSection === "verified")
+    }
+
+    if (item.href === "/company") {
+      return pathname === "/company"
+    }
+
+    if (pathname !== "/" || !item.href.startsWith("/#")) {
+      return false
+    }
+
+    return activeSection === item.href.replace("/#", "")
   }
 
   return (
     <header
       ref={headerRef}
       className={cn(
-        "sticky top-0 z-50 w-full border-b transition-all duration-300",
-        isScrolled ? "border-white/10 shadow-sm" : "border-transparent",
+        "fixed top-0 z-50 w-full border-b transition-all duration-300",
+        isScrolled
+          ? "border-black/10 bg-background/80 shadow-[0_18px_60px_-44px_rgba(46,34,38,0.26)] backdrop-blur-xl"
+          : "border-transparent bg-transparent",
       )}
-      style={{ backgroundColor: "rgba(6, 78, 59, 0.95)" }}
     >
-      <div className="container flex h-16 items-center justify-between">
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5 }}
-          className="flex items-center gap-2"
+      <div className="container relative flex h-16 items-center justify-between gap-6 px-4 md:h-[4.5rem] md:px-6">
+        <Link
+          href="/"
+          onClick={(e) => handleNavClick(e, "/")}
+          className={cn(
+            "rounded-sm font-display text-sm font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70 focus-visible:ring-offset-2 md:text-[0.95rem]",
+            isScrolled ? "text-black focus-visible:ring-offset-background" : "text-white focus-visible:ring-offset-[#041711]",
+          )}
         >
-          <Link
-            href="#"
-            onClick={(e) => handleNavClick(e, "#")}
-            className="text-xl font-bold font-serif text-white flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mint-green/80 focus-visible:ring-offset-2 focus-visible:ring-offset-forest-green rounded-sm"
-          >
-            <span>CLVR</span>
-            <span className="font-normal">Automations</span>
-          </Link>
-        </motion.div>
+          CLVR Systems
+        </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center gap-6">
-          {navItems.map((item, i) => (
-            <motion.div
+        <nav
+          className={cn(
+            "absolute left-1/2 hidden -translate-x-1/2 items-center gap-1 rounded-full px-2 py-1.5 xl:flex",
+            isScrolled ? "border border-black/[0.06] bg-white/[0.74] shadow-[0_16px_40px_-34px_rgba(0,0,0,0.34)] backdrop-blur-md" : "bg-white/[0.06] backdrop-blur-[2px]",
+          )}
+        >
+          {navItems.map((item) => (
+            <Link
               key={item.href}
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: 0.1 * i }}
+              href={item.href}
+              onClick={(e) => handleNavClick(e, item.href)}
+              aria-current={isActive(item) ? "page" : undefined}
+              className={cn(
+                "relative rounded-full px-3.5 py-2 text-[0.8rem] font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70 focus-visible:ring-offset-2",
+                isActive(item)
+                  ? isScrolled
+                    ? "bg-[#eef3ee] text-black"
+                    : "bg-white/12 text-white"
+                  : isScrolled
+                    ? "text-black/[0.52] hover:text-black focus-visible:ring-offset-background"
+                    : "text-white/68 hover:text-white focus-visible:ring-offset-[#041711]",
+              )}
             >
-              <Link
-                href={item.href}
-                onClick={(e) => handleNavClick(e, item.href)}
-                className={cn(
-                  "text-sm font-medium text-white hover:text-white transition-colors relative group px-1 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mint-green/80 focus-visible:ring-offset-2 focus-visible:ring-offset-forest-green rounded-sm",
-                  (activeSection === item.href.replace("#", "") || (activeSection === "" && item.href === "#")) &&
-                    "after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-mint-green",
-                )}
-              >
-                {item.label}
-                <span className="absolute -bottom-0 left-1/2 w-0 h-0.5 bg-mint-green transition-all duration-300 group-hover:w-full group-hover:left-0"></span>
-              </Link>
-            </motion.div>
+              {item.label}
+            </Link>
           ))}
         </nav>
 
-        <div className="flex items-center gap-4">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.3, delay: 0.5 }}
-            className="hidden sm:block"
+        <div className="flex items-center gap-3">
+          <Link
+            href="/#contact"
+            onClick={(e) => handleNavClick(e, "/#contact")}
+            className={cn(
+              "hidden rounded-full px-5 py-2 text-[0.8rem] font-semibold transition xl:inline-flex",
+              isScrolled
+                ? "border border-black bg-black text-white hover:bg-black/90"
+                : "border border-white/18 bg-white text-black hover:bg-white/90",
+            )}
           >
-            <a href="https://tally.so/r/mZGbo5" target="_blank" rel="noopener noreferrer">
-              <Button className="bg-mint-green text-forest-green hover:bg-mint-green/90 transition-all duration-300 focus-visible:ring-2 focus-visible:ring-mint-green/80 focus-visible:ring-offset-2 focus-visible:ring-offset-forest-green">
-                Talk to Us About Systems
-              </Button>
-            </a>
-          </motion.div>
+            Start a Conversation
+          </Link>
 
-          {/* Mobile menu button */}
-          <div className="lg:hidden">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-              className="text-white hover:bg-forest-green/50 focus-visible:ring-2 focus-visible:ring-mint-green/80 focus-visible:ring-offset-2 focus-visible:ring-offset-forest-green"
-            >
-              {mobileMenuOpen ? <X /> : <Menu />}
-            </Button>
-          </div>
+          <button
+            type="button"
+            onClick={() => setMobileMenuOpen((open) => !open)}
+            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+            className={cn(
+              "inline-flex h-9 w-9 items-center justify-center rounded-sm transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70 focus-visible:ring-offset-2 xl:hidden",
+              isScrolled
+                ? "text-black hover:bg-black/[0.05] focus-visible:ring-offset-background"
+                : "text-white hover:bg-white/10 focus-visible:ring-offset-[#041711]",
+            )}
+          >
+            {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
         </div>
       </div>
 
-      {/* Mobile Navigation Menu */}
       {mobileMenuOpen && (
-        <motion.div
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: "auto" }}
-          transition={{ duration: 0.3 }}
-          className="lg:hidden fixed inset-0 top-16 bg-forest-green z-40 overflow-auto"
-        >
-          <nav className="flex flex-col py-8 px-6 h-full">
-            {navItems.map((item, i) => (
-              <motion.div
+        <div className="xl:hidden border-t border-black/10 bg-background/95 backdrop-blur-xl">
+          <nav className="container flex flex-col gap-1 py-6">
+            {navItems.map((item) => (
+              <Link
                 key={item.href}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.3, delay: 0.05 * i }}
+                href={item.href}
+                onClick={(e) => handleNavClick(e, item.href)}
+                className={cn(
+                  "rounded-sm border-b border-black/10 py-3.5 text-lg text-black/72 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/80 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+                  isActive(item) ? "text-black" : "hover:text-black",
+                )}
               >
-                <Link
-                  href={item.href}
-                  onClick={(e) => handleNavClick(e, item.href)}
-                  className={cn(
-                    "block py-4 text-xl font-medium text-white hover:text-mint-green transition-colors border-b border-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mint-green/80 focus-visible:ring-offset-2 focus-visible:ring-offset-forest-green rounded-sm",
-                    (activeSection === item.href.replace("#", "") || (activeSection === "" && item.href === "#")) &&
-                      "text-mint-green",
-                  )}
-                >
-                  {item.label}
-                </Link>
-              </motion.div>
+                {item.label}
+              </Link>
             ))}
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: 0.4 }}
-              className="mt-auto"
+            <Link
+              href="/#contact"
+              onClick={(e) => handleNavClick(e, "/#contact")}
+              className="mt-5 inline-flex rounded-full border border-black bg-black px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-black/90"
             >
-              <a href="https://tally.so/r/mZGbo5" target="_blank" rel="noopener noreferrer">
-                <Button className="w-full bg-mint-green text-forest-green hover:bg-mint-green/90 py-6 text-lg focus-visible:ring-2 focus-visible:ring-mint-green/80 focus-visible:ring-offset-2 focus-visible:ring-offset-forest-green">
-                  Talk to Us About Systems
-                </Button>
-              </a>
-            </motion.div>
+              Start a Conversation
+            </Link>
           </nav>
-        </motion.div>
+        </div>
       )}
     </header>
   )
