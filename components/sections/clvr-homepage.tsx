@@ -1,7 +1,7 @@
 import type { ReactNode } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowRight, CheckCircle2 } from "lucide-react"
+import { ArrowRight, CheckCircle2, ExternalLink } from "lucide-react"
 import CoreOperatingLoop from "@/components/sections/core-operating-loop"
 import Reveal from "@/components/ui-custom/reveal"
 import { cn } from "@/lib/utils"
@@ -12,6 +12,7 @@ type SystemRow = {
   details: string
   status: string
   href: string
+  externalUrl?: string
   tone?: "layer"
 }
 
@@ -27,6 +28,7 @@ const systems: SystemRow[] = [
     details: "Recall / rebooking / referrals / follow-up",
     status: "First applied system",
     href: "/systems#emilia",
+    externalUrl: "https://emilia.clvrautomations.com/",
   },
   {
     name: "MarginFlow",
@@ -34,6 +36,7 @@ const systems: SystemRow[] = [
     details: "Pricing / approvals / invoicing / collections",
     status: "In development",
     href: "/systems#marginflow",
+    externalUrl: "https://marginflow.clvrautomations.com",
   },
   {
     name: "SupplierOps",
@@ -48,6 +51,7 @@ const systems: SystemRow[] = [
     details: "Recommendations / reviews / actions / outcomes",
     status: "Proof layer",
     href: "/verified",
+    externalUrl: "https://verified.clvrautomations.com/",
     tone: "layer",
   },
 ]
@@ -166,28 +170,43 @@ function SectionIntro({
 
 function SystemsIndex({ showCta = false }: { showCta?: boolean }) {
   return (
-    <Reveal className="mt-12">
+    <Reveal className="mt-14">
       <div className="border-y border-black/[0.09]">
         {systems.map((system, index) => (
-          <Reveal key={system.name} delay={index * 0.045} className="border-t border-black/[0.07] first:border-t-0">
-            <Link
-              href={system.href}
+          <Reveal key={system.name} delay={index * 0.07} className="border-t border-black/[0.07] first:border-t-0">
+            <article
               className={cn(
-                "group grid gap-5 py-6 transition duration-300 hover:-translate-y-0.5 hover:bg-white/[0.48] md:grid-cols-[0.68fr_1.32fr] md:items-center md:px-4",
+                "group grid gap-5 py-7 transition duration-500 hover:-translate-y-1 hover:bg-white/[0.46] md:grid-cols-[0.66fr_1.34fr] md:items-center md:px-4",
                 system.tone === "layer" && "bg-primary/[0.03]",
               )}
             >
               <div>
-                <h3 className="font-display text-[1.48rem] font-semibold leading-tight text-black transition group-hover:translate-x-1 md:text-[1.62rem]">
+                <Link
+                  href={system.href}
+                  className="inline-flex font-display text-[1.38rem] font-semibold leading-tight text-black transition duration-300 hover:translate-x-1 hover:text-primary md:text-[1.54rem]"
+                >
                   {system.name}
-                </h3>
+                </Link>
                 <p className="mt-2 text-xs font-semibold text-primary md:text-sm">{system.status}</p>
               </div>
               <div>
-                <p className="text-sm leading-7 text-black/[0.66] md:text-[0.96rem]">{system.description}</p>
-                <p className="mt-2 text-xs leading-6 text-black/[0.44] md:text-sm">{system.details}</p>
+                <p className="text-sm leading-7 text-black/[0.62] md:text-[0.95rem]">{system.description}</p>
+                <div className="mt-3 flex flex-col gap-3 text-xs leading-6 text-black/[0.44] md:flex-row md:items-center md:justify-between md:text-sm">
+                  <p>{system.details}</p>
+                  {system.externalUrl ? (
+                    <Link
+                      href={system.externalUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex w-fit items-center gap-1.5 rounded-full border border-black/[0.09] bg-white/50 px-3 py-1.5 text-xs font-semibold text-black/58 transition duration-300 hover:-translate-y-0.5 hover:border-primary/30 hover:text-primary"
+                    >
+                      Visit system
+                      <ExternalLink className="h-3.5 w-3.5" aria-hidden />
+                    </Link>
+                  ) : null}
+                </div>
               </div>
-            </Link>
+            </article>
           </Reveal>
         ))}
       </div>
@@ -282,18 +301,30 @@ function HeroSection() {
 }
 
 function ThesisSection() {
+  const lines = [
+    "Most operational failure does not come from lack of software.",
+    "It comes from work disappearing between tools, teams, approvals, and follow-up.",
+    "CLVR turns those gaps into controlled systems.",
+  ]
+
   return (
-    <section className="py-32 md:py-44">
+    <section className="py-36 md:py-52">
       <div className="container px-4 md:px-6">
-        <Reveal className="mx-auto max-w-5xl">
-          <div className="space-y-8 text-balance font-display text-[1.95rem] font-semibold leading-[1.1] text-black md:text-[2.65rem] xl:text-[3.1rem]">
-            <p>Most operational failure does not come from lack of software.</p>
-            <p className="text-black/56">
-              It comes from work disappearing between tools, teams, inboxes, approvals, and follow-up.
-            </p>
-            <p className="text-primary">CLVR turns those gaps into controlled systems.</p>
-          </div>
-        </Reveal>
+        <div className="mx-auto max-w-3xl text-center">
+          {lines.map((line, index) => (
+            <Reveal key={line} delay={index * 0.12} distance={28} className="mt-6 first:mt-0">
+              <p
+                className={cn(
+                  "text-balance font-display text-[1.42rem] font-semibold leading-[1.18] md:text-[2.05rem] xl:text-[2.35rem]",
+                  index === 1 && "text-black/54",
+                  index === 2 ? "text-primary" : "text-black",
+                )}
+              >
+                {line}
+              </p>
+            </Reveal>
+          ))}
+        </div>
       </div>
     </section>
   )
@@ -301,7 +332,7 @@ function ThesisSection() {
 
 function CoreSection() {
   return (
-    <section id="core" className="relative overflow-hidden bg-[#03140f] py-28 text-white md:py-40">
+    <section id="core" className="relative overflow-hidden bg-[#03140f] py-32 text-white md:py-44">
       <div className="absolute inset-0 clvr-visual-grain opacity-[0.13]" aria-hidden />
       <div
         className="absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(186,243,217,0.14),transparent_30%),radial-gradient(circle_at_86%_16%,rgba(255,255,255,0.08),transparent_24%),linear-gradient(180deg,rgba(3,20,15,0),rgba(0,0,0,0.18))]"
@@ -328,12 +359,12 @@ function CoreSection() {
 
 function SystemsPreviewSection() {
   return (
-    <section id="systems" className="bg-[#f7f6f1] py-32 transition-colors duration-700 md:py-44">
+    <section id="systems" className="bg-[#f7f6f1] py-36 transition-colors duration-700 md:py-52">
       <div className="container px-4 md:px-6">
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <SectionIntro
             title="Systems built from the CLVR core."
-            description="CLVR builds systems for business areas where missed actions, weak handoffs, and poor records create real cost."
+            description="CLVR builds systems for areas where missed actions, weak handoffs, and poor records create real cost."
           />
           <Reveal className="md:pb-2">
             <SecondaryLink href="/systems">View Systems</SecondaryLink>
@@ -360,24 +391,25 @@ function DifferenceSection() {
   ]
 
   return (
-    <section className="py-32 md:py-44">
+    <section className="py-36 md:py-52">
       <div className="container px-4 md:px-6">
         <div className="grid gap-14 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-start">
           <SectionIntro
             title="Most tools show the gap. CLVR helps close it."
-            description="Dashboards show what happened. Automation tools trigger tasks. But important work still disappears when ownership, approvals, follow-up, and records are spread across disconnected systems."
+            description="Important work still disappears when ownership, approvals, follow-up, and records are spread across disconnected systems."
           />
 
-          <Reveal className="space-y-7">
+          <Reveal className="space-y-9" distance={28}>
             <p className="max-w-2xl text-sm leading-7 text-black/[0.58] md:text-base">
-              CLVR systems are built around the workflow itself. They help teams understand what is happening,
-              decide what should happen next, move the work forward, and record the outcome.
+              CLVR systems are built around the workflow itself: what happened, what should happen next, who
+              reviews it, and what outcome gets recorded.
             </p>
             <div className="grid gap-4">
-              {states.map((state) => (
-                <div
+              {states.map((state, index) => (
+                <Reveal
                   key={state.title}
-                  className="grid gap-5 rounded-[1.35rem] border border-black/[0.07] bg-[#f8f7f2] p-5 md:grid-cols-[8.5rem_minmax(0,1fr)] md:items-center"
+                  delay={index * 0.1}
+                  className="grid gap-5 rounded-[1.35rem] border border-black/[0.07] bg-[#f8f7f2] p-5 transition duration-500 hover:-translate-y-1 hover:border-black/[0.1] md:grid-cols-[8.5rem_minmax(0,1fr)] md:items-center"
                 >
                   <div className="relative aspect-[1.3] overflow-hidden rounded-[1rem] border border-black/[0.05] bg-white">
                     <Image src={state.image} alt="" fill sizes="160px" className="object-cover" />
@@ -388,7 +420,7 @@ function DifferenceSection() {
                     </h3>
                     <p className="mt-3 max-w-xl text-sm leading-7 text-black/[0.56]">{state.description}</p>
                   </div>
-                </div>
+                </Reveal>
               ))}
             </div>
           </Reveal>
@@ -400,7 +432,7 @@ function DifferenceSection() {
 
 function VerifiedSection() {
   return (
-    <section id="verified" className="relative overflow-hidden bg-[#041711] py-32 text-white md:py-44">
+    <section id="verified" className="relative overflow-hidden bg-[#041711] py-36 text-white md:py-52">
       <div className="absolute inset-0 clvr-visual-grain opacity-[0.16]" aria-hidden />
       <div className="container relative px-4 md:px-6">
         <div className="grid gap-12 lg:grid-cols-[minmax(0,0.86fr)_minmax(0,1.14fr)] lg:items-center">
@@ -426,13 +458,13 @@ function VerifiedSection() {
 
 function PrinciplesSection() {
   return (
-    <section className="bg-[#f7f6f1] py-32 transition-colors duration-700 md:py-44">
+    <section className="bg-[#f7f6f1] py-36 transition-colors duration-700 md:py-52">
       <div className="container px-4 md:px-6">
         <SectionIntro title="Built around control, not noise." />
         <div className="mt-12 border-y border-black/[0.09]">
           {principles.map((principle, index) => (
-            <Reveal key={principle.title} delay={index * 0.035} className="border-t border-black/[0.07] first:border-t-0">
-              <div className="grid gap-5 py-7 md:grid-cols-[0.72fr_1.28fr] md:items-center md:px-4">
+              <Reveal key={principle.title} delay={index * 0.07} className="border-t border-black/[0.07] first:border-t-0">
+              <div className="grid gap-5 py-7 transition duration-500 hover:-translate-y-0.5 hover:bg-white/[0.38] md:grid-cols-[0.72fr_1.28fr] md:items-center md:px-4">
                 <h3 className="font-display text-[1.45rem] font-semibold leading-tight text-black md:text-[1.65rem]">
                   {principle.title}
                 </h3>
@@ -463,8 +495,8 @@ function FAQSection() {
 
           <div className="grid gap-3">
             {faqs.map((faq, index) => (
-              <Reveal key={faq.question} delay={index * 0.03}>
-                <details className="group rounded-[1.2rem] border border-white/10 bg-white/[0.055] px-6 py-5 transition duration-300 hover:-translate-y-0.5 hover:bg-white/[0.08]">
+              <Reveal key={faq.question} delay={index * 0.06}>
+                <details className="group rounded-[1.2rem] border border-white/10 bg-white/[0.055] px-6 py-5 transition duration-500 hover:-translate-y-1 hover:bg-white/[0.08]">
                   <summary className="flex cursor-pointer list-none items-center justify-between gap-5 text-base font-semibold text-white">
                     <span>{faq.question}</span>
                     <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/12 bg-white/[0.08] text-white transition group-open:rotate-45">

@@ -1,7 +1,7 @@
 import type { ReactNode } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight, ExternalLink } from "lucide-react"
 import CoreOperatingLoop from "@/components/sections/core-operating-loop"
 import Reveal from "@/components/ui-custom/reveal"
 import { cn } from "@/lib/utils"
@@ -12,6 +12,7 @@ type SystemRow = {
   description: string
   details: string
   positioning: string
+  externalUrl?: string
   tone?: "layer"
 }
 
@@ -22,6 +23,7 @@ const systems: SystemRow[] = [
     description: "Retention and referral infrastructure for aesthetic clinics.",
     details: "Recall / rebooking / referrals / follow-up",
     positioning: "The first applied CLVR system.",
+    externalUrl: "https://emilia.clvrautomations.com/",
   },
   {
     id: "marginflow",
@@ -29,6 +31,7 @@ const systems: SystemRow[] = [
     description: "Quote-to-cash control for trades and service teams.",
     details: "Pricing / approvals / invoicing / collections",
     positioning: "In development.",
+    externalUrl: "https://marginflow.clvrautomations.com",
   },
   {
     id: "supplierops",
@@ -43,6 +46,7 @@ const systems: SystemRow[] = [
     description: "Proof records for decisions, approvals, actions, and outcomes.",
     details: "Recommendations / reviews / actions / outcomes",
     positioning: "Record layer across CLVR systems.",
+    externalUrl: "https://verified.clvrautomations.com/",
     tone: "layer",
   },
 ]
@@ -84,11 +88,11 @@ function SystemsIndex() {
   return (
     <div className="border-y border-black/[0.09]">
       {systems.map((system, index) => (
-        <Reveal key={system.name} delay={index * 0.045} className="border-t border-black/[0.07] first:border-t-0">
+        <Reveal key={system.name} delay={index * 0.07} className="border-t border-black/[0.07] first:border-t-0">
           <article
             id={system.id}
             className={cn(
-              "group grid scroll-mt-28 gap-5 py-6 transition duration-300 hover:-translate-y-0.5 hover:bg-white/[0.48] md:grid-cols-[0.68fr_1.32fr] md:items-center md:px-4",
+              "group grid scroll-mt-28 gap-5 py-7 transition duration-500 hover:-translate-y-1 hover:bg-white/[0.48] md:grid-cols-[0.66fr_1.34fr] md:items-center md:px-4",
               system.tone === "layer" && "bg-primary/[0.03]",
             )}
           >
@@ -100,7 +104,20 @@ function SystemsIndex() {
             </div>
             <div>
               <p className="text-sm leading-7 text-black/[0.66] md:text-[0.96rem]">{system.description}</p>
-              <p className="mt-2 text-xs leading-6 text-black/[0.44] md:text-sm">{system.details}</p>
+              <div className="mt-3 flex flex-col gap-3 text-xs leading-6 text-black/[0.44] md:flex-row md:items-center md:justify-between md:text-sm">
+                <p>{system.details}</p>
+                {system.externalUrl ? (
+                  <Link
+                    href={system.externalUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex w-fit items-center gap-1.5 rounded-full border border-black/[0.09] bg-white/50 px-3 py-1.5 text-xs font-semibold text-black/58 transition duration-300 hover:-translate-y-0.5 hover:border-primary/30 hover:text-primary"
+                  >
+                    Visit system
+                    <ExternalLink className="h-3.5 w-3.5" aria-hidden />
+                  </Link>
+                ) : null}
+              </div>
             </div>
           </article>
         </Reveal>
@@ -179,7 +196,7 @@ export default function SystemsPage() {
         </Reveal>
       </section>
 
-      <section id="core" className="relative overflow-hidden bg-[#03140f] py-28 text-white md:py-40">
+      <section id="core" className="relative overflow-hidden bg-[#03140f] py-32 text-white md:py-44">
         <div className="absolute inset-0 clvr-visual-grain opacity-[0.13]" aria-hidden />
         <div
           className="absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(186,243,217,0.14),transparent_30%),radial-gradient(circle_at_86%_16%,rgba(255,255,255,0.08),transparent_24%),linear-gradient(180deg,rgba(3,20,15,0),rgba(0,0,0,0.18))]"
@@ -200,7 +217,7 @@ export default function SystemsPage() {
         </div>
       </section>
 
-      <section className="bg-[#f7f6f1] py-32 transition-colors duration-700 md:py-44">
+      <section className="bg-[#f7f6f1] py-36 transition-colors duration-700 md:py-52">
         <div className="container px-4 md:px-6">
           <Reveal className="mb-12 max-w-3xl">
             <h2 className="text-balance font-display text-[1.95rem] font-semibold leading-[1.05] text-black md:text-[2.55rem]">
@@ -213,7 +230,7 @@ export default function SystemsPage() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-[#061710] py-28 text-white md:py-40">
+      <section className="relative overflow-hidden bg-[#061710] py-32 text-white md:py-44">
         <div className="absolute inset-0 clvr-visual-grain opacity-[0.1]" aria-hidden />
         <div className="container relative grid gap-12 px-4 md:px-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-center">
           <Reveal className="max-w-3xl space-y-5">

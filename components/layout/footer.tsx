@@ -21,10 +21,10 @@ export default function Footer() {
     {
       title: "Systems",
       links: [
-        { label: "Emilia", href: "/systems#emilia" },
-        { label: "MarginFlow", href: "/systems#marginflow" },
-        { label: "SupplierOps", href: "/systems#supplierops" },
-        { label: "CLVR Verified", href: "/verified" },
+        { label: "Emilia", href: "https://emilia.clvrautomations.com/" },
+        { label: "MarginFlow", href: "https://marginflow.clvrautomations.com" },
+        { label: "SupplierOps" },
+        { label: "CLVR Verified", href: "https://verified.clvrautomations.com/" },
       ],
     },
     {
@@ -62,6 +62,8 @@ export default function Footer() {
                       <Link
                         key={`${column.title}-${link.label}`}
                         href={link.href}
+                        target={link.href.startsWith("http") ? "_blank" : undefined}
+                        rel={link.href.startsWith("http") ? "noreferrer" : undefined}
                         className="text-sm text-black/[0.58] hover:text-black"
                       >
                         {link.label}

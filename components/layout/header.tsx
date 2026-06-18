@@ -9,7 +9,6 @@ import { cn } from "@/lib/utils"
 import { useScrollSpy } from "@/hooks/use-scroll-spy"
 
 const navItems = [
-  { href: "/#core", label: "Core" },
   { href: "/systems", label: "Systems" },
   { href: "/verified", label: "Verified" },
   { href: "/company", label: "Company" },
@@ -23,7 +22,7 @@ export default function Header() {
   const pathname = usePathname()
 
   const activeSection = useScrollSpy(
-    ["core", "systems", "verified", "contact"],
+    ["systems", "verified", "contact"],
     {
       threshold: 0.24,
       rootMargin: "-96px 0px -62% 0px",
