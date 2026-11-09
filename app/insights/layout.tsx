@@ -1,0 +1,16 @@
+import type { ReactNode } from "react";
+import Header from "@/components/layout/header";
+import Footer from "@/components/layout/footer";
+import "./insights.css";
+
+export default function InsightsLayout({ children }: { children: ReactNode }) {
+  return (
+    <div className="insights-experience flex min-h-screen flex-col">
+      <Header />
+      <main id="main-content" className="flex-1">
+        {children}
+      </main>
+      <Footer />
+    </div>
+  );
+}

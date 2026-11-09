@@ -1,17 +1,17 @@
-import Header from "@/components/layout/header"
-import Footer from "@/components/layout/footer"
-import ClvrHomepage from "@/components/sections/clvr-homepage"
+import Header from "@/components/layout/header";
+import Footer from "@/components/layout/footer";
+import ClvrHomepage from "@/components/sections/clvr-homepage";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col bg-background text-foreground">
+    <div className="flex min-h-screen flex-col">
       <Header />
 
-      <main className="flex-1">
+      <main id="main-content" className="flex-1">
         <ClvrHomepage />
       </main>
 
       <Footer />
     </div>
-  )
+  );
 }

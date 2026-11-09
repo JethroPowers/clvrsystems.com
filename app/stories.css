@@ -1,0 +1,667 @@
+/* Scroll-led portfolio, Juris and the long-form Approach page. */
+.portfolio-scroll .portfolio-layout {
+  display: block;
+}
+.portfolio-sticky {
+  display: none;
+}
+.portfolio-chapter {
+  display: grid;
+  grid-template-columns: 0.75fr 1.25fr;
+  gap: clamp(35px, 6vw, 90px);
+  align-items: center;
+  padding-block: 55px;
+  border-top: 1px solid var(--rule);
+}
+.portfolio-chapter-copy h3 {
+  font-size: clamp(32px, 3.4vw, 48px);
+  line-height: 1.07;
+  letter-spacing: -0.05em;
+  margin-block: 25px 16px;
+}
+.portfolio-chapter-copy > p {
+  font-size: 16px;
+  line-height: 1.85;
+  color: var(--ink-muted);
+  margin-block: 23px 18px;
+  max-width: 385px;
+}
+.portfolio-chapter-copy .product-status {
+  color: var(--product-accent);
+}
+.portfolio-inline-art {
+  min-width: 0;
+}
+.portfolio-scroll.is-scroll-active .portfolio-layout {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.7fr) minmax(0, 1.3fr);
+  align-items: start;
+  gap: clamp(45px, 7vw, 100px);
+}
+.is-scroll-active .portfolio-stories {
+  min-width: 0;
+}
+.is-scroll-active .portfolio-sticky {
+  display: block;
+  position: sticky;
+  top: 112px;
+  min-width: 0;
+}
+.is-scroll-active .portfolio-chapter {
+  display: flex;
+  align-items: center;
+  min-height: 64svh;
+  padding-block: 70px;
+  border-top: 0;
+  border-bottom: 1px solid var(--rule);
+}
+.is-scroll-active .portfolio-chapter:first-child {
+  padding-top: 0;
+}
+.is-scroll-active .portfolio-chapter:last-child {
+  border-bottom: 0;
+}
+.is-scroll-active .portfolio-chapter-copy h3 {
+  color: #6d7c6b;
+  transition: color 0.4s;
+}
+.is-scroll-active .portfolio-chapter.is-current h3 {
+  color: var(--ink);
+}
+.is-scroll-active .portfolio-inline-art {
+  display: none;
+}
+.is-scroll-active .product-artboard {
+  min-height: 410px;
+  padding: 22px;
+}
+.is-scroll-active .product-scene {
+  padding-block: 18px;
+}
+.is-scroll-active .interface-body {
+  padding: 20px;
+}
+.is-scroll-active .interface-body h3,
+.is-scroll-active .ledger-body h3 {
+  font-size: 25px;
+}
+.is-scroll-active .product-caption {
+  min-height: 108px;
+  padding-top: 24px;
+}
+.is-scroll-active .product-caption h3 {
+  font-size: clamp(23px, 2.3vw, 32px);
+}
+.portfolio-scroll-cue {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--rule);
+  color: #64765f;
+  font-size: 10px;
+}
+.portfolio-scroll-cue > span:first-child {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.portfolio-scroll-cue > div {
+  display: flex;
+  gap: 7px;
+}
+.portfolio-scroll-cue > div > span {
+  width: 20px;
+  height: 2px;
+  background: #c2cbbd;
+  transition: background 0.3s;
+}
+.portfolio-scroll-cue > div > .is-active {
+  background: #3b6040;
+}
+.workflow-approach-link {
+  color: #d2e3c9;
+}
+
+/* A Juris composition using the project's existing globe artwork. */
+.juris-interface {
+  background: #101310;
+  color: #ecebdc;
+  border-color: #ffffff20;
+}
+.juris-interface .ledger-header {
+  background: #161b17;
+  border-bottom: 1px solid #ffffff1a;
+  padding: 20px 24px;
+}
+.juris-interface .ledger-header strong {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font:
+    23px Georgia,
+    serif;
+  letter-spacing: 0.02em;
+}
+.juris-interface .ledger-header strong > span {
+  font: 6px var(--font-manrope);
+  letter-spacing: 0.2em;
+  padding-left: 9px;
+  border-left: 1px solid #9d987a;
+}
+.juris-interface .ledger-header > span {
+  color: #b9b59d;
+  font-size: 6px;
+}
+.juris-atlas-scene {
+  position: relative;
+  overflow: hidden;
+  min-height: 225px;
+  isolation: isolate;
+  background: #000;
+}
+.juris-atlas-scene > img {
+  position: absolute;
+  width: 290px;
+  height: 290px;
+  right: -20px;
+  top: -25px;
+  object-fit: contain;
+  opacity: 0.8;
+  z-index: -1;
+}
+.juris-atlas-scene::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, #000 8%, #000b 38%, transparent 80%);
+  z-index: -1;
+}
+.juris-atlas-copy {
+  padding: 32px 24px;
+}
+.juris-atlas-copy .interface-eyebrow {
+  color: #b8ab84;
+}
+.juris-atlas-copy h3 {
+  font-family: Georgia, serif;
+  font-size: 31px;
+  font-weight: 400;
+  line-height: 1.06;
+  letter-spacing: -0.045em;
+  margin-top: 17px;
+}
+.juris-atlas-marker {
+  display: inline-flex;
+  align-items: center;
+  gap: 15px;
+  color: #d5c9a7;
+  font-size: 8px;
+  margin-top: 23px;
+}
+.juris-research-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 15px;
+  padding: 20px 24px;
+  border-block: 1px solid #ffffff1a;
+}
+.juris-research-strip > div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.juris-research-strip > div > span {
+  color: #a69a76;
+  font-size: 7px;
+}
+.juris-research-strip strong {
+  font-size: 10px;
+  font-weight: 500;
+  margin-top: 8px;
+}
+.juris-research-strip small {
+  font-size: 7px;
+  color: #a6ad9c;
+  margin-top: 5px;
+  line-height: 1.5;
+}
+.juris-interface-foot {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #a6ad9c;
+  padding: 14px 24px;
+  font-size: 7px;
+}
+.juris-interface-foot .signal-dot {
+  width: 4px;
+  height: 4px;
+  color: #bca978;
+}
+.evidence-juris {
+  margin-top: clamp(70px, 8vw, 115px);
+  padding-top: clamp(65px, 7vw, 95px);
+  border-top: 1px solid #d5d2c7;
+  grid-template-columns: 1.2fr 0.8fr;
+}
+.evidence-juris .evidence-copy {
+  grid-column: 2;
+  grid-row: 1;
+}
+.evidence-juris .evidence-visual {
+  grid-column: 1;
+  grid-row: 1;
+}
+.evidence-juris .evidence-type {
+  color: #786442;
+  border-color: #c5bba6;
+}
+.juris-case-art {
+  padding: clamp(22px, 3vw, 44px);
+  border-radius: 5px;
+  background: #d7d4c7;
+}
+.juris-case-art .juris-atlas-scene {
+  min-height: 285px;
+}
+.juris-case-art .juris-atlas-scene > img {
+  width: 355px;
+  height: 355px;
+  top: -30px;
+  right: -40px;
+}
+.juris-case-art .juris-atlas-copy {
+  padding-block: 52px;
+}
+.juris-case-art .juris-atlas-copy h3 {
+  font-size: clamp(27px, 3vw, 40px);
+}
+
+/* Approach: readable stories, each with a product and a concrete workflow. */
+.approach-intro {
+  background: var(--paper);
+}
+.approach-index {
+  margin-top: 75px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-block: 1px solid var(--rule);
+}
+.approach-index a {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 17px;
+  padding: 28px 25px;
+  border-right: 1px solid var(--rule);
+}
+.approach-index a:first-child {
+  padding-left: 0;
+}
+.approach-index a:last-child {
+  border-right: 0;
+}
+.approach-index a > span {
+  font-size: 10px;
+  color: var(--ink-muted);
+  grid-column: 1 / -1;
+}
+.approach-index strong {
+  font: 23px var(--font-space-grotesk);
+  letter-spacing: -0.045em;
+  grid-column: 1;
+}
+.approach-index small {
+  grid-column: 1 / -1;
+  grid-row: 3;
+  color: var(--ink-muted);
+  font-size: 10px;
+}
+.approach-index svg {
+  grid-column: 2;
+  grid-row: 2;
+}
+.approach-index a:hover {
+  background: #e9ebe1;
+}
+.system-study {
+  --study-accent: #526b55;
+  background: #f0eee8;
+}
+.system-study:nth-of-type(2n) {
+  background: var(--paper);
+}
+.study-product-name {
+  font: 21px var(--font-space-grotesk);
+  letter-spacing: -0.04em;
+}
+.study-intro {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 75px;
+  align-items: end;
+}
+.study-intro h2 {
+  font-size: clamp(35px, 4.25vw, 62px);
+}
+.study-intro > p {
+  font-size: 16px;
+  line-height: 1.85;
+  color: var(--ink-muted);
+  max-width: 440px;
+  justify-self: end;
+}
+.study-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(50px, 8vw, 120px);
+  align-items: start;
+  margin-top: 80px;
+}
+.study-visual {
+  position: sticky;
+  top: 112px;
+  min-width: 0;
+}
+.study-artboard {
+  border-radius: 4px;
+  padding: clamp(20px, 2.5vw, 36px);
+}
+.study-artboard > .artboard-bottom {
+  margin-top: 22px;
+}
+.study-visual .interface-sidebar {
+  display: none;
+}
+.study-visual .emilia-interface {
+  display: block;
+}
+.study-visual blockquote {
+  margin: 30px 0 15px;
+  padding-left: 23px;
+  border-left: 2px solid var(--study-accent);
+  font: 24px / 1.4 var(--font-space-grotesk);
+  letter-spacing: -0.04em;
+  max-width: 470px;
+}
+.study-visual > .text-link {
+  margin-left: 25px;
+}
+.study-narrative .eyebrow {
+  color: var(--study-accent);
+}
+.study-narrative h3 {
+  font-size: 30px;
+  letter-spacing: -0.045em;
+  margin-block: 13px 20px;
+}
+.study-narrative p {
+  font-size: 15px;
+  line-height: 1.85;
+  color: var(--ink-muted);
+}
+.study-response {
+  margin-top: 40px;
+}
+.study-stages {
+  list-style: none;
+  margin: 35px 0 0;
+  padding: 0;
+}
+.study-stages li {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 16px;
+  padding-block: 27px;
+  border-top: 1px solid var(--rule);
+}
+.study-step-number {
+  font-size: 10px;
+  color: var(--study-accent);
+  padding-top: 4px;
+}
+.study-stages h4 {
+  font-size: 21px;
+  letter-spacing: -0.035em;
+  margin-bottom: 12px;
+}
+.study-stages p {
+  font-size: 14px;
+}
+.study-example {
+  margin-top: 70px;
+  border: 1px solid #d4d9cc;
+  padding: clamp(25px, 3vw, 40px);
+}
+.study-example > .eyebrow {
+  color: var(--study-accent);
+}
+.study-example dl {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 40px;
+  margin-top: 27px;
+}
+.study-example dt {
+  font: 24px var(--font-space-grotesk);
+  letter-spacing: -0.035em;
+}
+.study-example dd {
+  margin-top: 12px;
+  color: var(--ink-muted);
+  font-size: 14px;
+  line-height: 1.8;
+}
+.study-outcome {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 65px;
+  padding-top: 40px;
+}
+.study-outcome > div {
+  max-width: 710px;
+}
+.study-outcome p {
+  margin-top: 14px;
+  font-size: 16px;
+  line-height: 1.85;
+  color: var(--ink-muted);
+}
+.study-outcome .button {
+  flex-shrink: 0;
+}
+
+@media (max-width: 1100px) {
+  .portfolio-scroll.is-scroll-active .portfolio-layout {
+    grid-template-columns: minmax(230px, 0.7fr) minmax(0, 1.3fr);
+    gap: 38px;
+  }
+  .study-intro {
+    gap: 40px;
+  }
+  .study-layout {
+    gap: 45px;
+  }
+  .approach-index a {
+    padding-inline: 18px;
+  }
+  .approach-index strong {
+    font-size: 21px;
+  }
+}
+@media (max-width: 959px) {
+  .portfolio-chapter {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  .portfolio-chapter-copy > p {
+    max-width: 600px;
+  }
+  .portfolio-chapter-copy h3 {
+    font-size: 40px;
+  }
+  .portfolio-inline-art .product-artboard {
+    min-height: 440px;
+  }
+  .evidence-juris {
+    grid-template-columns: 1fr;
+  }
+  .evidence-juris .evidence-copy,
+  .evidence-juris .evidence-visual {
+    grid-column: auto;
+    grid-row: auto;
+  }
+  .study-intro {
+    grid-template-columns: 1fr;
+    gap: 27px;
+  }
+  .study-intro > p {
+    justify-self: start;
+    max-width: 650px;
+  }
+  .study-layout {
+    grid-template-columns: 1fr;
+    gap: 50px;
+    margin-top: 48px;
+  }
+  .study-visual {
+    position: relative;
+    top: 0;
+  }
+  .study-artboard {
+    max-width: 650px;
+  }
+  .study-visual blockquote {
+    max-width: 650px;
+  }
+  .approach-index {
+    grid-template-columns: 1fr 1fr;
+  }
+  .approach-index a,
+  .approach-index a:first-child {
+    padding: 25px;
+  }
+  .approach-index a:nth-child(2) {
+    border-right: 0;
+  }
+  .approach-index a:nth-child(-n + 2) {
+    border-bottom: 1px solid var(--rule);
+  }
+  .study-outcome {
+    gap: 30px;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+@media (max-width: 700px) {
+  .portfolio-chapter {
+    padding-block: 40px;
+  }
+  .portfolio-chapter-copy h3 {
+    font-size: 36px;
+    margin-top: 18px;
+  }
+  .portfolio-chapter-copy > p {
+    font-size: 15px;
+  }
+  .portfolio-inline-art .product-artboard {
+    min-height: 400px;
+  }
+  .workflow-approach-link {
+    font-size: 11px;
+    gap: 8px;
+  }
+  .juris-interface .ledger-header {
+    padding: 17px;
+  }
+  .juris-interface .ledger-header > span {
+    display: none;
+  }
+  .juris-atlas-copy {
+    padding: 27px 19px;
+  }
+  .juris-atlas-copy h3 {
+    font-size: 27px;
+  }
+  .juris-atlas-scene > img {
+    right: -80px;
+  }
+  .juris-research-strip {
+    padding: 18px;
+    gap: 10px;
+  }
+  .juris-interface-foot {
+    padding: 14px 18px;
+    font-size: 6px;
+  }
+  .juris-case-art {
+    padding: 17px;
+  }
+  .juris-case-art .juris-atlas-scene > img {
+    right: -90px;
+  }
+  .evidence-details {
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .approach-index {
+    margin-top: 45px;
+  }
+  .approach-index a,
+  .approach-index a:first-child {
+    padding: 20px 14px;
+    gap: 13px;
+  }
+  .approach-index strong {
+    font-size: 20px;
+  }
+  .approach-index small {
+    font-size: 9px;
+  }
+  .approach-index svg {
+    width: 14px;
+  }
+  .study-product-name {
+    font-size: 17px;
+  }
+  .study-intro h2 {
+    font-size: 36px;
+  }
+  .study-intro > p {
+    font-size: 15px;
+  }
+  .study-visual blockquote {
+    font-size: 23px;
+  }
+  .study-narrative h3 {
+    font-size: 29px;
+  }
+  .study-example {
+    margin-top: 35px;
+  }
+  .study-example dl {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+  .study-example dl > div + div {
+    border-top: 1px solid var(--rule);
+    padding-top: 22px;
+  }
+  .study-example dd {
+    margin-top: 8px;
+  }
+}
+@media (min-width: 960px) and (max-height: 800px) {
+  .study-visual {
+    position: relative;
+    top: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .study-visual {
+    position: relative;
+    top: 0;
+  }
+}
