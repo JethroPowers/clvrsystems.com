@@ -1,0 +1,225 @@
+.recordScan {
+  --progress: var(--diagram-progress, 1);
+}
+
+.recordScan {
+  position: relative;
+  isolation: isolate;
+  margin-top: 24px;
+  padding: 14px;
+  overflow: hidden;
+  border: 1px solid #3b5042;
+  border-radius: 4px;
+  background:
+    radial-gradient(circle, #89a49140 1px, transparent 1.5px) 0 0 / 12px 12px,
+    #17231b;
+}
+
+.records {
+  display: grid;
+  gap: 5px;
+}
+
+.record {
+  display: grid;
+  grid-template-columns: 17px minmax(0, 1fr) 16px;
+  align-items: center;
+  gap: 8px;
+  min-height: 27px;
+  padding: 4px 7px;
+  border: 1px solid #496151;
+  border-radius: 3px;
+  background: #1c2a21;
+  color: var(--accent);
+  transform: translateX(calc(var(--record-offset, 0px) * (1 - var(--progress))));
+}
+
+.bankRecord {
+  --record-offset: -4px;
+}
+
+.mobileRecord {
+  --record-offset: 7px;
+  --exception: clamp(0, calc((var(--progress) - 0.48) * 3), 1);
+  position: relative;
+}
+
+.mobileRecord::after {
+  position: absolute;
+  inset: -1px;
+  border: 1px solid #b7875c;
+  border-radius: inherit;
+  background: #c9924f14;
+  content: "";
+  opacity: var(--exception);
+  pointer-events: none;
+}
+
+.ledgerRecord {
+  --record-offset: -6px;
+}
+
+.recordFields {
+  display: grid;
+  grid-template-columns: 0.9fr 1.25fr 0.55fr;
+  gap: 9px;
+  align-items: center;
+}
+
+.ledgerRecord .recordFields {
+  grid-template-columns: 1.15fr 0.9fr 0.65fr;
+}
+
+.recordFields span {
+  height: 3px;
+  border-radius: 4px;
+  background: #769581;
+}
+
+.recordFields span:nth-child(2) {
+  opacity: 0.48;
+}
+
+.mobileRecord .recordFields span:nth-child(2) {
+  transform: scaleX(0.54);
+  transform-origin: left;
+}
+
+.recordStatus {
+  display: grid;
+  place-items: center;
+}
+
+.mobileRecord .recordStatus {
+  color: var(--review);
+  opacity: var(--exception);
+}
+
+.scanLine {
+  position: absolute;
+  inset: 7px 13px;
+  height: auto;
+  opacity: clamp(0, min(calc(var(--progress) * 9), calc((1 - var(--progress)) * 9)), 1);
+  transform: translateX(calc(var(--progress) * 100%));
+  pointer-events: none;
+}
+
+.scanLine::before {
+  display: block;
+  width: 2px;
+  height: 100%;
+  background: var(--accent);
+  box-shadow: 0 0 9px var(--accent);
+  content: "";
+}
+
+.flow {
+  --progress: clamp(0, calc((var(--diagram-progress, 1) - var(--flow-delay, 0)) / var(--flow-window, 1)), 1);
+  --flow-fill: clamp(0, calc((var(--progress) - 0.08) / 0.72), 1);
+  --arrival: clamp(0, calc((var(--progress) - 0.7) / 0.3), 1);
+  --flow-ink: var(--accent);
+  display: grid;
+  grid-template-columns: auto minmax(14px, 1fr) auto;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  max-width: 270px;
+  min-height: 52px;
+  padding: 7px;
+  border: 1px solid #3b5042;
+  border-radius: 4px;
+  background: #152019;
+}
+
+.review {
+  --flow-ink: var(--review);
+}
+
+.sources {
+  display: flex;
+  gap: 4px;
+}
+
+.diagramIcon {
+  position: relative;
+  display: grid;
+  width: 27px;
+  height: 29px;
+  place-items: center;
+  border: 1px solid #3b5042;
+  border-radius: 3px;
+  background: #1e2c23;
+  color: var(--accent);
+}
+
+.sources .diagramIcon:first-child {
+  transform: translateY(calc(3px * (1 - var(--progress))));
+}
+
+.sources .diagramIcon:nth-child(2) {
+  transform: translateY(calc(-3px * (1 - var(--progress))));
+}
+
+.destination {
+  width: 34px;
+  height: 34px;
+  color: var(--flow-ink);
+}
+
+.destination::after {
+  position: absolute;
+  inset: -1px;
+  border: 1px solid currentColor;
+  border-radius: inherit;
+  box-shadow: 0 0 9px currentColor;
+  content: "";
+  opacity: calc(var(--arrival) * 0.55);
+  pointer-events: none;
+}
+
+.flowLine {
+  position: relative;
+  height: 2px;
+  background: #536c5b;
+}
+
+.flowLine::before {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, var(--accent), var(--flow-ink));
+  transform: scaleX(var(--flow-fill));
+  transform-origin: left;
+  content: "";
+}
+
+.flowLine span {
+  position: absolute;
+  inset: 0;
+  opacity: clamp(0, min(calc(var(--flow-fill) * 9), calc((1 - var(--flow-fill)) * 9)), 1);
+  transform: translateX(calc(var(--flow-fill) * 100%));
+}
+
+.flowLine span::before {
+  position: absolute;
+  top: -2px;
+  left: -3px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--flow-ink);
+  box-shadow: 0 0 7px var(--flow-ink);
+  content: "";
+}
+
+@media (max-width: 810px) {
+  .recordScan {
+    margin-top: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .recordScan,
+  .flow {
+    --progress: 1;
+  }
+}
