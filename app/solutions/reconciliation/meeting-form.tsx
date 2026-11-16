@@ -160,7 +160,7 @@ export default function MeetingForm({ privacyUrl, contactEmail }: {
         <p className={styles.formNote}>
           CLVR uses your details to respond to this enquiry. <a href={privacyUrl}>Privacy notice</a>
         </p>
-        <button className={`button button-light ${styles.submit}`} type="submit" disabled={sending}>
+        <button className={`button button-dark ${styles.submit}`} type="submit" disabled={sending}>
           {sending ? "Sending request…" : "Request a 20-minute meeting"}
           <ArrowUpRight size={16} aria-hidden />
         </button>

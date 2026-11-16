@@ -85,7 +85,7 @@
 }
 
 .hero {
-  background: radial-gradient(ellipse at 83% 46%, #203326, transparent 58%), var(--surface);
+  background: var(--surface);
   padding-block: clamp(40px, 4.75vw, 70px);
 }
 
@@ -218,10 +218,7 @@
   padding: clamp(15px, 1.6vw, 22px);
   border: 1px solid #3e5143;
   border-radius: 5px;
-  background:
-    radial-gradient(circle, #78998235 1px, transparent 1.4px) 0 0 / 16px 16px,
-    #141e17;
-  box-shadow: 0 18px 54px #050c084d;
+  background: #171f19;
 }
 
 .previewCaption {
@@ -413,7 +410,6 @@
 
 .chapter {
   --chapter-line: #8aad92;
-  --chapter-glow: #38503e;
   --chapter-origin: left;
   --chapter-entry: clamp(0, calc((var(--chapter-progress, 0.5) - 0.04) / 0.34), 1);
   --chapter-exit: clamp(0, calc((var(--chapter-progress, 0.5) - 0.61) / 0.31), 1);
@@ -436,7 +432,7 @@
   width: min(100% - var(--page-gutter) * 2, 1080px);
   height: 2px;
   margin-inline: auto;
-  background: linear-gradient(90deg, var(--chapter-line), transparent);
+  background: var(--chapter-line);
   content: "";
   opacity: calc(0.25 + 0.5 * var(--chapter-entry) - 0.4 * var(--chapter-exit));
   pointer-events: none;
@@ -446,18 +442,6 @@
 
 .hero.chapter::before {
   display: none;
-}
-
-.chapter::after {
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  background:
-    radial-gradient(ellipse at 50% 48%, var(--chapter-glow), transparent 65%),
-    linear-gradient(180deg, var(--surface), transparent 24% 78%, var(--surface));
-  content: "";
-  opacity: calc(0.13 + 0.43 * var(--chapter-entry) * (1 - var(--chapter-exit)));
-  pointer-events: none;
 }
 
 .chapter [data-chapter-lead] {
@@ -472,13 +456,7 @@
 .exampleSection {
   --chapter-origin: center;
   --chapter-line: #c6e1c9;
-  --chapter-glow: #425e48;
-  background: radial-gradient(ellipse at 48% 56%, #243529 0%, var(--surface) 72%);
-}
-
-.exampleSection::before,
-.sectorSection::before {
-  background: linear-gradient(90deg, transparent, var(--chapter-line), transparent);
+  background: #1a241d;
 }
 
 .workflowSection {
@@ -492,8 +470,7 @@
 
 .sectorSection {
   --chapter-origin: center;
-  --chapter-glow: #3f5945;
-  background: radial-gradient(ellipse at 50% 17%, #203024, var(--surface) 72%);
+  background: #161e18;
 }
 
 .engagementSection {
@@ -806,12 +783,6 @@
   align-items: start;
 }
 
-.formPanel {
-  border: 1px solid var(--line);
-  border-radius: 5px;
-  background: var(--raised);
-}
-
 .exampleGrid {
   --flow-width: clamp(72px, 8vw, 120px);
   --track-height: 72px;
@@ -914,7 +885,7 @@
   position: absolute;
   inset: 0;
   border-radius: 2px;
-  background: linear-gradient(90deg, var(--accent), var(--review));
+  background: var(--review);
   content: "";
   transform: scaleX(var(--signal-progress));
   transform-origin: left;
@@ -936,7 +907,6 @@
   height: 9px;
   border-radius: 50%;
   background: currentColor;
-  box-shadow: 0 0 8px currentColor;
   content: "";
   transform: translate(-50%, -50%);
 }
@@ -1063,7 +1033,6 @@
   inset: -1px;
   border: 2px solid var(--review);
   border-radius: inherit;
-  box-shadow: inset 0 0 25px #e2a86720, 0 0 30px #e2a86742;
   content: "";
   opacity: var(--review-progress, 0);
   pointer-events: none;
@@ -1116,7 +1085,6 @@
 }
 
 .company {
-  --chapter-glow: #4c6954;
   min-block-size: 84vh;
   min-block-size: 84svh;
   padding-block: clamp(46px, 5.2vw, 76px);
@@ -1203,17 +1171,11 @@
 }
 
 .meeting {
-  --chapter-glow: #4c6954;
+  --chapter-line: #b4c6b4;
   padding-block: clamp(60px, 7.5vw, 108px);
-  border-top: 1px solid #4a6251;
-  background: #1b2a20;
+  border-top: 1px solid var(--line);
+  background: #151c17;
 }
-
-.meeting .formPanel {
-  border-color: #627c69;
-  box-shadow: 0 16px 40px #0a120d65;
-}
-
 
 .meetingGrid h2 {
   text-wrap: initial;
@@ -1229,12 +1191,30 @@
 }
 
 .formPanel {
-  padding: clamp(16px, 2.55vw, 32px);
+  --form-ink: #17261c;
+  --form-quiet: #49564c;
+  --form-line: #a0ad9f;
+  --form-accent: #315a3d;
   min-width: 0;
+  padding: clamp(19px, 2.55vw, 32px);
+  border: 1px solid #c8d0c4;
+  border-top: 3px solid #86a08b;
+  border-radius: 4px;
+  background: #edf0e9;
+  color: var(--form-ink);
+  color-scheme: light;
+}
+
+.formPanel :focus-visible {
+  outline-color: var(--form-accent);
+}
+
+.formPanel .inlineLink {
+  color: var(--form-accent);
 }
 
 .formPanel > p {
-  color: var(--quiet);
+  color: var(--form-quiet);
   font-size: 14px;
   margin-top: 12px;
   line-height: 1.6;
@@ -1250,7 +1230,7 @@
 
 .formCheck {
   margin-bottom: 14px;
-  color: var(--accent);
+  color: var(--form-accent);
 }
 
 .formFields {
@@ -1263,7 +1243,7 @@
 .fieldLegend {
   width: 100%;
   margin-block: 9px 14px;
-  color: var(--quiet);
+  color: var(--form-quiet);
   font-size: 12px;
 }
 
@@ -1283,10 +1263,10 @@
   min-width: 0;
   min-height: 44px;
   padding: 8px 10px;
-  border: 1px solid #54655a;
+  border: 1px solid #859486;
   border-radius: 3px;
-  background: #101612;
-  color: var(--text);
+  background: #fcfdf9;
+  color: var(--form-ink);
   font-size: 16px;
   font-weight: 500;
 }
@@ -1301,7 +1281,7 @@
 
 .optional {
   margin-block: 17px;
-  border-block: 1px solid var(--line);
+  border-block: 1px solid var(--form-line);
 }
 
 .optional summary {
@@ -1311,8 +1291,13 @@
   font-weight: 700;
 }
 
+.optional summary:hover,
+.optional summary svg {
+  color: var(--form-accent);
+}
+
 .optional summary span {
-  color: var(--quiet);
+  color: var(--form-quiet);
   font-size: 12px;
   font-weight: 500;
 }
@@ -1333,7 +1318,7 @@
 
 .formNote {
   margin-block: 9px;
-  color: var(--quiet);
+  color: var(--form-quiet);
 }
 
 .formNote a,
@@ -1353,7 +1338,7 @@
 
 .formError {
   margin-top: 14px;
-  color: #ffd2b8;
+  color: #8a3521;
 }
 
 .formError p {

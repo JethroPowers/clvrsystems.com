@@ -268,10 +268,7 @@ export default function ReconciliationPage() {
             ) : (
               <div className={styles.formPanel}>
                 <h3 id="meeting-form-title" tabIndex={-1}>Request a 20-minute meeting</h3>
-                <p>Send CLVR a brief note about your role, company and availability to arrange a conversation.</p>
-                <a href={`mailto:${contactEmail}?subject=CLVR%20Reconcile%20meeting%20request`} className={`button button-light ${styles.primary}`}>
-                  Email CLVR Systems <ArrowUpRight size={17} aria-hidden />
-                </a>
+                <p>Meeting requests will open once our inbox is ready.</p>
               </div>
             )}
           </div>
