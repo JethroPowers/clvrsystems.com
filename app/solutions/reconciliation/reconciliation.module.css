@@ -459,6 +459,18 @@
   background: #1a241d;
 }
 
+.demoSection {
+  background: #141c16;
+}
+
+.demoIntro {
+  max-width: 58ch;
+  margin: 16px auto 0;
+  color: var(--quiet);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
 .workflowSection {
   --chapter-origin: center;
   background: #17231b;

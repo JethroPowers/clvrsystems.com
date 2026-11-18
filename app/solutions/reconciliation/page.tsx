@@ -16,6 +16,7 @@ import {
   reconciliationHeadline, reconciliationImageAlt, sectors, stages,
 } from "./content";
 import { ChapterMotion } from "./chapter-motion";
+import { DemoWalkthrough } from "./demo-walkthrough";
 import { FlowDiagram, RecordScanDiagram } from "./diagrams";
 import MeetingForm from "./meeting-form";
 import { PracticalExample, ReceiptPreview } from "./receipt-example";
@@ -136,6 +137,19 @@ export default function ReconciliationPage() {
               </div>
             </div>
             <PracticalExample />
+          </div>
+        </section>
+
+        <section className={`${styles.section} ${styles.chapter} ${styles.demoSection}`} id="demo" aria-labelledby="demo-heading" data-chapter>
+          <div className="site-container">
+            <div className={`${styles.sectionLead} ${styles.centeredLead}`} data-chapter-lead>
+              <div>
+                <p className={`eyebrow ${styles.kicker}`}>Inside the demo</p>
+                <h2 id="demo-heading">Follow the investigation.</h2>
+                <p className={styles.demoIntro}>Explore the proposed workflow in a working browser demo, using the same fictional invoice.</p>
+              </div>
+            </div>
+            <DemoWalkthrough />
           </div>
         </section>
 
