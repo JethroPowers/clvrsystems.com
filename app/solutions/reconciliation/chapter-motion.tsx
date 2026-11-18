@@ -33,7 +33,6 @@ export function ChapterMotion({ children }: { children: ReactNode }) {
     const diagrams = Array.from(element.querySelectorAll<HTMLElement>("[data-chapter-diagram]"));
     const reveals = Array.from(element.querySelectorAll<HTMLElement>("[data-scroll-reveal]"));
     const workflow = element.querySelector<HTMLElement>("[data-chapter-track]");
-    const demo = element.querySelector<HTMLElement>("[data-demo-scroll]");
     const cleanup = [
       ...reveals.map((target) => trackProgress(target, "--reveal-progress", ["start 93%", "start 58%"])),
       ...chapters.map((target) => trackProgress(target, "--chapter-progress", ["start end", "end start"])),
@@ -44,8 +43,6 @@ export function ChapterMotion({ children }: { children: ReactNode }) {
       )),
     ];
     if (workflow) cleanup.push(trackProgress(workflow, "--workflow-progress", ["start 78%", "start 33%"]));
-
-    if (demo) cleanup.push(trackProgress(demo, "--demo-progress", ["start 90%", "end 40%"]));
 
     return () => cleanup.forEach((stop) => stop());
   }, [reduced]);
