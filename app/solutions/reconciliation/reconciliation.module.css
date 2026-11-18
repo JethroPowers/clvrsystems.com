@@ -446,7 +446,19 @@
 
 .chapter [data-chapter-lead] {
   opacity: calc(0.8 + 0.2 * var(--chapter-entry));
-  transform: translateY(calc(18px * (1 - var(--chapter-entry))));
+  transform: translateY(calc(32px * (1 - var(--chapter-entry))));
+}
+
+.page [data-scroll-reveal] {
+  --reveal: var(--reveal-progress, 1);
+  opacity: calc(0.72 + 0.28 * var(--reveal));
+  transform: translate3d(0, calc(32px * (1 - var(--reveal))), 0);
+}
+
+.page [data-scroll-reveal]:focus-within,
+:global(html[data-motion="reduced"]) .page [data-scroll-reveal] {
+  opacity: 1;
+  transform: none;
 }
 
 .problemSection {
@@ -1688,6 +1700,11 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .page [data-scroll-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+
   .chapter {
     --chapter-entry: 1;
     --chapter-exit: 0;

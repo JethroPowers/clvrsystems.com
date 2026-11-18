@@ -118,7 +118,7 @@ export default function ReconciliationPage() {
             </div>
             <ul className={styles.problemList}>
               {problems.map(({ icon: Icon, title, detail }) => (
-                <li key={title}>
+                <li key={title} data-scroll-reveal>
                   <Icon size={23} aria-hidden />
                   <h3>{title}</h3>
                   <p>{detail}</p>
@@ -163,7 +163,7 @@ export default function ReconciliationPage() {
             </div>
             <ol className={`${styles.steps} ${styles.workflowSteps}`} data-chapter-track>
               {stages.map(({ title, detail, diagramSources, diagramDestination, review }, index) => (
-                <li key={title}>
+                <li key={title} data-scroll-reveal>
                   <span className={styles.stepNumber} aria-hidden>{String(index + 1).padStart(2, "0")}</span>
                   <FlowDiagram sources={diagramSources} destination={diagramDestination} review={review} />
                   <h3>{title}</h3>
@@ -188,7 +188,7 @@ export default function ReconciliationPage() {
             </div>
             <ul className={styles.capabilityGrid}>
               {capabilities.map(({ icon: Icon, title, detail }) => (
-                <li key={title}>
+                <li key={title} data-scroll-reveal>
                   <Icon size={23} aria-hidden />
                   <div><h3>{title}</h3><p>{detail}</p></div>
                 </li>
@@ -207,7 +207,7 @@ export default function ReconciliationPage() {
             </div>
             <ul className={`${styles.cardGrid} ${styles.sectorGrid}`}>
               {sectors.map(({ icon: Icon, relatedIcon, title, detail }) => (
-                <li key={title}>
+                <li key={title} data-scroll-reveal>
                   <FlowDiagram sources={[Icon, relatedIcon]} destination={FileText} />
                   <h3>{title}</h3>
                   <p>{detail}</p>
@@ -230,7 +230,7 @@ export default function ReconciliationPage() {
             <div>
               <ol className={`${styles.steps} ${styles.engagementSteps}`} data-chapter-diagram="milestones">
                 {engagements.map(({ title, detail }, index) => (
-                  <li key={title}>
+                  <li key={title} data-scroll-reveal>
                     <span className={styles.stepNumber} aria-hidden>{String(index + 1).padStart(2, "0")}</span>
                     <h3>{title}</h3>
                     <p>{detail}</p>

@@ -1,4 +1,6 @@
 .walkthrough {
+  --demo-arrival: clamp(0, calc(var(--demo-progress, 1) / 0.5), 1);
+  --demo-drift: clamp(0, calc((var(--demo-progress, 0) - 0.55) / 0.45), 1);
   min-width: 0;
 }
 
@@ -28,6 +30,7 @@
   content: "";
   transform: scaleX(0);
   transform-origin: left;
+  transition: transform 280ms ease;
 }
 
 .tabs button:hover,
@@ -49,6 +52,15 @@
 .screen {
   min-width: 0;
   margin: 0;
+  transform:
+    translate3d(0, calc(36px * (1 - var(--demo-arrival)) - 12px * var(--demo-drift)), 0)
+    scale(calc(0.965 + 0.035 * var(--demo-arrival)))
+    rotate(calc(-0.8deg * (1 - var(--demo-arrival))));
+  transform-origin: center;
+}
+
+.screen:focus-within {
+  transform: none;
 }
 
 .screen a {
@@ -56,6 +68,7 @@
 }
 
 .imageFrame {
+  position: relative;
   display: grid;
   min-width: 0;
   aspect-ratio: 4 / 3;
@@ -66,11 +79,46 @@
   background: #101612;
 }
 
+.imageFrame::after {
+  position: absolute;
+  inset: -1px -1px auto;
+  height: 2px;
+  background: var(--accent);
+  content: "";
+  pointer-events: none;
+  transform: scaleX(var(--demo-progress, 1));
+  transform-origin: left;
+}
+
+:global(html[data-motion="full"]) .walkthrough[data-motion="full"] .panel:not([hidden]) .imageFrame {
+  animation: screenEnter 440ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+:global(html[data-motion="full"]) .walkthrough[data-motion="full"] .panel:not([hidden]) .explanation h3,
+:global(html[data-motion="full"]) .walkthrough[data-motion="full"] .panel:not([hidden]) .explanation p {
+  animation: copyEnter 440ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+:global(html[data-motion="full"]) .walkthrough[data-motion="full"] .panel:not([hidden]) .explanation p {
+  animation-delay: 60ms;
+}
+
+@keyframes screenEnter {
+  from { transform: translate3d(0, 18px, 0) scale(0.985); }
+  to { transform: translate3d(0, 0, 0) scale(1); }
+}
+
+@keyframes copyEnter {
+  from { opacity: 0.88; transform: translate3d(0, 12px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
 .imageFrame img {
+  position: absolute;
+  inset: 8px;
   display: block;
-  width: 100%;
-  height: auto;
-  max-height: 100%;
+  width: calc(100% - 16px);
+  height: calc(100% - 16px);
   object-fit: contain;
   border-radius: 3px;
 }
@@ -87,6 +135,11 @@
 
 .screen a:hover .enlarge {
   color: var(--accent);
+}
+
+.explanation {
+  opacity: calc(0.9 + 0.1 * var(--demo-arrival));
+  transform: translate3d(calc(18px * (1 - var(--demo-arrival))), 0, 0);
 }
 
 .explanation h3 {
@@ -110,11 +163,22 @@
 }
 
 .explanation li {
+  --point-arrival: clamp(0, calc((var(--demo-arrival) - var(--point-delay, 0)) / 0.72), 1);
   display: flex;
   gap: 10px;
   color: #d1d9d1;
   font-size: 13px;
   line-height: 1.6;
+  opacity: calc(0.8 + 0.2 * var(--point-arrival));
+  transform: translate3d(0, calc(14px * (1 - var(--point-arrival))), 0);
+}
+
+.explanation li:nth-child(2) {
+  --point-delay: 0.14;
+}
+
+.explanation li:nth-child(3) {
+  --point-delay: 0.28;
 }
 
 .explanation li::before {
@@ -163,6 +227,14 @@
 }
 
 @media (max-width: 810px) {
+  .screen {
+    transform: translate3d(0, calc(20px * (1 - var(--demo-arrival)) - 6px * var(--demo-drift)), 0);
+  }
+
+  .explanation {
+    transform: translate3d(0, calc(12px * (1 - var(--demo-arrival))), 0);
+  }
+
   .panel:not([hidden]) {
     display: flex;
     flex-direction: column;
@@ -196,5 +268,43 @@
 
   .footer {
     flex-direction: column;
+  }
+}
+
+.walkthrough[data-motion="reduced"] .screen,
+.walkthrough[data-motion="reduced"] .explanation,
+.walkthrough[data-motion="reduced"] .explanation li {
+  opacity: 1;
+  transform: none;
+}
+
+.walkthrough[data-motion="reduced"] .imageFrame::after {
+  transform: none;
+}
+
+.walkthrough[data-motion="reduced"] .tabs button::after {
+  transition: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .screen,
+  .explanation,
+  .explanation li {
+    opacity: 1;
+    transform: none;
+  }
+
+  .walkthrough[data-motion] .panel:not([hidden]) .imageFrame,
+  .walkthrough[data-motion] .panel:not([hidden]) .explanation h3,
+  .walkthrough[data-motion] .panel:not([hidden]) .explanation p {
+    animation: none;
+  }
+
+  .imageFrame::after {
+    transform: none;
+  }
+
+  .tabs button::after {
+    transition: none;
   }
 }

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { useRef, useState, type KeyboardEvent } from "react";
+import { useSiteMotion } from "@/components/ui-custom/site-motion";
 import styles from "./demo-walkthrough.module.css";
 
 const demoUrl = "https://clvr-reconcile-meeting-preview-b0nicswmo.vercel.app/demo/reconcile";
@@ -56,6 +57,7 @@ const screens = [
 ];
 
 export function DemoWalkthrough() {
+  const { reduced } = useSiteMotion();
   const [active, setActive] = useState(0);
   const tabs = useRef<Array<HTMLButtonElement | null>>([]);
 
@@ -74,7 +76,7 @@ export function DemoWalkthrough() {
   }
 
   return (
-    <div className={styles.walkthrough}>
+    <div className={styles.walkthrough} data-demo-scroll data-motion={reduced ? "reduced" : "full"}>
       <div className={styles.tabs} role="tablist" aria-label="Explore the demo investigation">
         {screens.map((screen, index) => (
           <button
